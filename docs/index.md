@@ -34,3 +34,11 @@
 
 - [Complete code walkthrough](implementation/code-walkthrough.md)
 - [E001 BM25 code guide](implementation/e001-bm25-code-guide.md)
+
+## E001 learning notes
+
+- [Learning path](learning/README.md)
+- [Tokenization](learning/01-tokenization.md)
+- [Inverted statistics](learning/02-inverted-statistics.md)
+- [Inverse document frequency](learning/03-inverse-document-frequency.md)
+- [Term-frequency saturation and length normalization](learning/04-term-frequency-saturation.md)

@@ -74,3 +74,7 @@ See the complete [documentation index](docs/index.md), including the project cha
 ## Understanding the code
 
 Read [`docs/implementation/code-walkthrough.md`](docs/implementation/code-walkthrough.md) for the architecture and [`docs/implementation/e001-bm25-code-guide.md`](docs/implementation/e001-bm25-code-guide.md) for the E001 execution path.
+
+## Implement E001 yourself
+
+Use [`docs/learning/README.md`](docs/learning/README.md) as the guided learning path. It currently covers tokenization and inverted statistics with toy examples, tests, design reasoning, and baseline boundaries.

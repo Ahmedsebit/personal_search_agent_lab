@@ -1,0 +1,5 @@
+name: e004-hybrid-token-reranker
+dataset: {root: datasets, version: synthetic-email-v1}
+retrieval: {type: hybrid, top_k: 50}
+reranking: {enabled: true, type: token_overlap, top_k: 10}
+report: {output_dir: experiments/results, save_per_query: true}

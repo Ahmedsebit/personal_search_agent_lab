@@ -1,0 +1,5 @@
+name: e003-hybrid-rrf
+dataset: {root: datasets, version: synthetic-email-v1}
+retrieval: {type: hybrid, top_k: 50}
+reranking: {enabled: false, top_k: 10}
+report: {output_dir: experiments/results, save_per_query: true}

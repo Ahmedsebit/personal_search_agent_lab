@@ -70,3 +70,7 @@ Then call `GET /health` or `POST /search`.
 7. No example metric is represented as measured until the experiment runs.
 
 See the complete [documentation index](docs/index.md), including the project charter, requirements, design notes, experiment plans, runbook, security guidance, and contribution workflow.
+
+## Understanding the code
+
+Read [`docs/implementation/code-walkthrough.md`](docs/implementation/code-walkthrough.md) for the architecture and [`docs/implementation/e001-bm25-code-guide.md`](docs/implementation/e001-bm25-code-guide.md) for the E001 execution path.

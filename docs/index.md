@@ -29,3 +29,8 @@
 - [Security and privacy](security-and-privacy.md)
 - [Glossary](glossary.md)
 - [ADR 0001](decisions/0001-evaluation-first.md)
+
+## Code explanations
+
+- [Complete code walkthrough](implementation/code-walkthrough.md)
+- [E001 BM25 code guide](implementation/e001-bm25-code-guide.md)

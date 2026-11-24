@@ -1,0 +1,24 @@
+experiment: E008
+epsilon: 0.01
+cohorts:
+  person_all: {scenario: [person, person_topic]}
+  temporal_all: {temporal_explicit: "1"}
+  field_and_temporal: {e003_cohort: field_and_temporal}
+  e002b_diagnostic: {e002b_diagnostic: "1"}
+evaluations:
+  v1:
+    annotations: docs/experiments/e003/e003-query-annotations.csv
+    runs: {control: runs/e008/v1/control.json, treatment: runs/e008/v1/treatment.json}
+    gates:
+      - {id: K-A, hypothesis: "H1 re-ranking improves ranking", cohort: all, metric: ndcg@10, kind: gt0}
+      - {id: K-B, hypothesis: "Recall@50 unchanged by construction", cohort: all, metric: recall@50, kind: equal}
+      - {id: K-C, hypothesis: "People not harmed", cohort: person_all, metric: ndcg@10, kind: guard}
+      - {id: K-D, hypothesis: "Recency ordering not undone", cohort: temporal_all, metric: ndcg@10, kind: guard}
+      - {id: K-E, hypothesis: "Mixed field+time not harmed", cohort: field_and_temporal, metric: ndcg@10, kind: guard}
+      - {id: K-F, hypothesis: "E002b wins retained", cohort: e002b_diagnostic, metric: ndcg@10, kind: per_query_retain}
+  v2:
+    optional: true
+    annotations: data/benchmark_v2/queries_v2.csv
+    runs: {control: runs/e008/v2/control.json, treatment: runs/e008/v2/treatment.json}
+    gates:
+      - {id: K-V2, hypothesis: "v2 structure not harmed", cohort: all, metric: ndcg@10, kind: guard}

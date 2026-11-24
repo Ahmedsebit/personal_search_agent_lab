@@ -1,0 +1,8 @@
+name: e002b-context-aware-bm25
+dataset: {root: datasets, version: synthetic-email-v2}
+retrieval:
+  type: context_aware_normalized_bm25
+  top_k: 50
+  bm25: {k1: 1.5, b: 0.75}
+reranking: {enabled: false, top_k: 10}
+report: {output_dir: experiments/results, save_per_query: true}

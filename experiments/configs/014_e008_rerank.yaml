@@ -1,0 +1,8 @@
+experiment: E008
+shared: experiments/configs/shared_data.yaml
+output_dir: runs/e008
+depth: 50
+arms:
+  treatment:
+    base: frozen_control
+    stages: [{type: rerank, scorer: cross_encoder, depth: 50}]

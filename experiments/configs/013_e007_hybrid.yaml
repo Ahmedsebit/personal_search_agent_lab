@@ -1,0 +1,14 @@
+experiment: E007
+shared: experiments/configs/shared_data.yaml
+output_dir: runs/e007
+depth: 50
+arms:
+  dense_only:
+    base: frozen_control
+    stages: [{type: dense, encoder: sentence_transformer}]
+  treatment:
+    base: frozen_control
+    stages: [{type: hybrid_rrf, k: 60, depth: 100, encoder: sentence_transformer}]
+  exploratory_k20:
+    base: frozen_control
+    stages: [{type: hybrid_rrf, k: 20, depth: 100, encoder: sentence_transformer}]

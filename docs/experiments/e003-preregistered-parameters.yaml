@@ -1,0 +1,50 @@
+# E003 preregistered parameters — FROZEN 2026-11-24. Do not edit; any change = new experiment ID.
+experiment: E003
+control: e002b-context-aware-query-normalized-bm25
+benchmark: frozen-200-query
+cohort_file: docs/experiments/e003/e003-query-annotations.csv
+cohort_file_sha256: ca0acd5db4dbed7a232f88ed664bce4cb9a5e5e6fb9cc7f26e3e29f5daff6d49
+inherit_from_e001: [k1, b, tokenizer, stopwords, idf]
+
+e003_f:
+  scoring: bm25f
+  fields: [sender, recipients, subject, body, attachment_names]
+  recipients_source: [to, cc]
+  field_weights: {sender: 3.0, subject: 2.0, attachment_names: 2.0, recipients: 1.0, body: 1.0}
+  cue_routing:
+    sender:
+      pattern: "from <identity_span>"
+      identity_span_source: e002b
+      span_field_weights: {sender: 3.0, subject: 0.0, attachment_names: 0.0, recipients: 0.0, body: 0.0}
+    attachment:
+      pattern: "attachment(s) about <topic>"
+      topic_field_weights: {attachment_names: 4.0, subject: 2.0, body: 1.0, sender: 0.0, recipients: 0.0}
+  structural_tokens_when_cue_fires: [emails, messages, from, attachment, attachments, about]
+
+e003_t:
+  detector_lexicon: [latest, newest, most recent, recent]
+  out_of_scope: [last week, yesterday, today, explicit dates, date ranges]
+  strip_temporal_tokens: true
+  candidate_depth: 50
+  rerank:
+    applies_to: temporal_queries_only
+    lexical_norm: min_max_within_candidates
+    recency: rank_based          # rec = 1 - (time_rank-1)/(n-1); newest = 1
+    lambda: 0.30
+    tie_break: [lexical_score_desc, doc_id_asc]
+
+e003_ft:
+  order: [e003_f_scoring, e003_t_rerank]
+  reuse_parameters: true
+
+evaluation:
+  primary_metric: ndcg@10
+  secondary_metrics: [recall@50, mrr, precision@10, recall@10, dcg@10]
+  weighting_primary: query
+  weighting_sensitivity: dedup_query_string
+  guardrail_epsilon: 0.01
+  bootstrap: {resamples: 10000, ci: 0.95, seed: 20261124}
+  change_tolerance: 1.0e-9
+  exploratory:
+    lambda_sensitivity: [0.15, 0.30, 0.50]
+    ablation: f_a_only_no_routing

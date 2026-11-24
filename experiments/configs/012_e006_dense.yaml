@@ -1,0 +1,8 @@
+experiment: E006
+shared: experiments/configs/shared_data.yaml
+output_dir: runs/e006
+depth: 50
+arms:
+  treatment:
+    base: frozen_control
+    stages: [{type: dense, encoder: sentence_transformer}]

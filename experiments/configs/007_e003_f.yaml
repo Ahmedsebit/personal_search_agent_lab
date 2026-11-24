@@ -1,0 +1,27 @@
+# E003 arm config — parameters are PREREGISTERED (docs/experiments/e003/e003-preregistered-parameters.yaml).
+# Only the data paths and the three 'control' import paths may be edited.
+experiment: E003
+arm: e003_f
+output_dir: runs/e003
+gain_mode: auto            # control arm picks the mode that reproduces frozen E002b; other arms reuse it
+
+data:
+  emails: datasets/synthetic/emails.jsonl
+  qrels: datasets/benchmarks/judgments.jsonl
+  annotations: docs/experiments/e003/e003-query-annotations.csv   # frozen, hash-checked
+  field_map: {}                                # e.g. {sender: from, timestamp: sent_at}
+
+control:                                       # frozen E002b — VERIFY these paths against your repo
+  factory: packages.search.retrieval.e003_repository:build_control
+  normalizer: control
+  tokenizer: packages.search.retrieval.bm25:tokenize
+  # factory: module:function       # optional: function(documents) -> retriever, if construction differs
+  # documents_loader: module:fn    # optional: function(emails_path) -> documents in your repo's format
+  k1: 1.5
+  b: 0.75
+
+params:
+  depth: 50
+  lambda: 0.30
+  routing: true
+  field_weights: {sender: 3.0, subject: 2.0, attachment_names: 2.0, recipients: 1.0, body: 1.0}

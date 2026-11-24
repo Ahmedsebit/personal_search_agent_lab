@@ -1,0 +1,8 @@
+experiment: E005
+shared: experiments/configs/shared_data.yaml
+output_dir: runs/e005
+depth: 50
+arms:
+  treatment:
+    base: frozen_control
+    stages: [{type: field_v2}, {type: range_filter, reference_time: corpus_max, depth: 1000}]

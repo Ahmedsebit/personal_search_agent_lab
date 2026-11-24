@@ -1,0 +1,5 @@
+name: e002-query-normalized-bm25
+dataset: {root: datasets, version: synthetic-email-v1}
+retrieval: {type: normalized_bm25, top_k: 50}
+reranking: {enabled: false, top_k: 10}
+report: {output_dir: experiments/results, save_per_query: true}

@@ -1,0 +1,14 @@
+experiment: E004
+shared: experiments/configs/shared_data.yaml
+output_dir: runs/e004
+depth: 50
+arms:
+  treatment:            # preregistered
+    base: frozen_control
+    stages: [{type: synonym_expansion, bidirectional: true, mode: append}]
+  exploratory_forward_only:
+    base: frozen_control
+    stages: [{type: synonym_expansion, bidirectional: false, mode: append}]
+  exploratory_replace:
+    base: frozen_control
+    stages: [{type: synonym_expansion, bidirectional: false, mode: replace}]

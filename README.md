@@ -77,4 +77,20 @@ Read [`docs/implementation/code-walkthrough.md`](docs/implementation/code-walkth
 
 ## Implement E001 yourself
 
-Use [`docs/learning/README.md`](docs/learning/README.md) as the guided learning path. It currently covers tokenization and inverted statistics with toy examples, tests, design reasoning, and baseline boundaries.
+Use [`docs/learning/README.md`](docs/learning/README.md) as the guided learning path. It covers tokenization, inverted statistics, IDF, term-frequency saturation, document-length normalization, and full BM25 ranked search with behavioral tests and baseline boundaries.
+
+## E003-E008 research experiments
+
+The [E003-E008 integration guide](README_E003_E008.md) adds field-aware and temporal
+retrieval, synonym expansion, structured-query benchmarks, semantic dense retrieval,
+hybrid fusion, and cross-encoder reranking. Existing E001-E002b code and the original
+hashing-dense baseline remain available.
+
+Install the base and test dependencies with `python -m pip install -e ".[dev]"`.
+Start with `python scripts\run_e003.py --config experiments\configs\000_e003_control.yaml`;
+the control must reproduce the frozen E002b metrics before evaluating new arms.
+Record each experiment's decision before updating the frozen control or proceeding.
+
+Real E006-E008 model runs additionally require
+`python -m pip install -e ".[models]"` and downloads of the preregistered public models.
+These dependencies and model downloads are not needed for lexical runs or unit tests.

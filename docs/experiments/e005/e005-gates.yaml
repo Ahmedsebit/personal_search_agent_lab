@@ -1,0 +1,22 @@
+experiment: E005
+epsilon: 0.01
+cohorts:
+  recipient: {scenario: recipient}
+  subject: {scenario: subject}
+  date_range: {scenario: date_range}
+evaluations:
+  v1:
+    annotations: docs/experiments/e003/e003-query-annotations.csv
+    runs: {control: runs/e005/v1/control.json, treatment: runs/e005/v1/treatment.json}
+    gates:
+      - {id: R-0, hypothesis: "All 200 original queries unchanged (no v2 cue fires)", cohort: all, kind: invariant_lists, k: 50}
+  v2:
+    annotations: data/benchmark_v2/queries_v2.csv
+    runs: {control: runs/e005/v2/control.json, treatment: runs/e005/v2/treatment.json}
+    gates:
+      - {id: R-A, component: field_v2, hypothesis: "Recipient routing improves recipient queries", cohort: recipient, metric: ndcg@10, kind: gt0, min_n: 15}
+      - {id: R-B, component: field_v2, hypothesis: "Recipient recall not harmed", cohort: recipient, metric: recall@50, kind: guard, min_n: 15}
+      - {id: R-C, component: field_v2, hypothesis: "Subject routing improves subject queries", cohort: subject, metric: ndcg@10, kind: gt0, min_n: 15}
+      - {id: R-D, component: range_filter, hypothesis: "Range filter improves date-range ranking", cohort: date_range, metric: ndcg@10, kind: gt0, min_n: 15}
+      - {id: R-E, component: range_filter, hypothesis: "Range filter improves date-range precision", cohort: date_range, metric: precision@10, kind: gt0, min_n: 15}
+      - {id: R-F, component: range_filter, hypothesis: "Range filter keeps in-range recall", cohort: date_range, metric: recall@50, kind: guard, min_n: 15}

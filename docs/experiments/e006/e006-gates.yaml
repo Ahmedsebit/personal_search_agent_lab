@@ -1,0 +1,17 @@
+experiment: E006
+epsilon: 0.01
+cohorts:
+  paraphrase: {lexical_form: paraphrase}
+  recall_limited_paraphrase: {sub_paraphrase_recall_limited: "1"}
+  person_all: {scenario: [person, person_topic]}
+  e002b_diagnostic: {e002b_diagnostic: "1"}
+evaluations:
+  v1:
+    annotations: docs/experiments/e003/e003-query-annotations.csv
+    runs: {control: runs/e006/v1/control.json, treatment: runs/e006/v1/treatment.json}
+    gates:
+      - {id: D-A, hypothesis: "H1 dense bridges paraphrase (ranking)", cohort: paraphrase, metric: ndcg@10, kind: gt0}
+      - {id: D-B, hypothesis: "H2 dense recovers missed documents", cohort: recall_limited_paraphrase, metric: recall@50, kind: gt0}
+      - {id: D-C, hypothesis: "H3 dense alone not worse overall", cohort: all, metric: ndcg@10, kind: guard}
+      - {id: D-D, hypothesis: "H4 dense alone not worse on people", cohort: person_all, metric: ndcg@10, kind: guard}
+      - {id: D-E, hypothesis: "E002b wins retained", cohort: e002b_diagnostic, metric: ndcg@10, kind: per_query_retain}

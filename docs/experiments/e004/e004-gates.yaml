@@ -1,0 +1,24 @@
+experiment: E004
+epsilon: 0.01
+cohorts:
+  paraphrase: {lexical_form: paraphrase}
+  canonical: {lexical_form: canonical}
+  recall_limited_paraphrase: {sub_paraphrase_recall_limited: "1"}
+  e002b_diagnostic: {e002b_diagnostic: "1"}
+  temporal_all: {temporal_explicit: "1"}
+  field_only: {e003_cohort: field_only}
+  not_expanded: {meta: synonym_expansion.changed, equals: false}
+evaluations:
+  v1:
+    annotations: docs/experiments/e003/e003-query-annotations.csv
+    runs: {control: runs/e004/v1/control.json, treatment: runs/e004/v1/treatment.json}
+    gates:
+      - {id: S-A, hypothesis: "H1 paraphrase ranking improves", cohort: paraphrase, metric: ndcg@10, kind: gt0}
+      - {id: S-B, hypothesis: "H2 paraphrase recall improves", cohort: paraphrase, metric: recall@50, kind: gt0}
+      - {id: S-C, hypothesis: "H2 recall-limited paraphrase recall improves", cohort: recall_limited_paraphrase, metric: recall@50, kind: gt0}
+      - {id: S-D, hypothesis: "H3 canonical queries not harmed", cohort: canonical, metric: ndcg@10, kind: guard}
+      - {id: S-E, hypothesis: "H3 canonical recall not harmed", cohort: canonical, metric: recall@50, kind: guard}
+      - {id: S-F, hypothesis: "H4 unexpanded queries identical", cohort: not_expanded, kind: invariant_lists, k: 50}
+      - {id: S-G, hypothesis: "E002b wins retained", cohort: e002b_diagnostic, metric: ndcg@10, kind: per_query_retain}
+      - {id: S-H, hypothesis: "Temporal behaviour not harmed", cohort: temporal_all, metric: ndcg@10, kind: guard}
+      - {id: S-I, hypothesis: "Field behaviour not harmed", cohort: field_only, metric: ndcg@10, kind: guard}

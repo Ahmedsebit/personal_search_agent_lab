@@ -1,0 +1,27 @@
+experiment: E007
+epsilon: 0.01
+cohorts:
+  paraphrase: {lexical_form: paraphrase}
+  canonical: {lexical_form: canonical}
+  person_all: {scenario: [person, person_topic]}
+  temporal_all: {temporal_explicit: "1"}
+  e002b_diagnostic: {e002b_diagnostic: "1"}
+evaluations:
+  v1:
+    annotations: docs/experiments/e003/e003-query-annotations.csv
+    runs: {control: runs/e007/v1/control.json, treatment: runs/e007/v1/treatment.json, dense_only: runs/e007/v1/dense_only.json}
+    gates:
+      - {id: H-A, hypothesis: "H1 hybrid beats control overall", cohort: all, metric: ndcg@10, kind: gt0}
+      - {id: H-B, hypothesis: "H2 hybrid improves paraphrase", cohort: paraphrase, metric: ndcg@10, kind: gt0}
+      - {id: H-C, hypothesis: "H3 hybrid recall above control", cohort: all, metric: recall@50, kind: gt0}
+      - {id: H-D, hypothesis: "H4 hybrid beats dense alone", cohort: all, metric: ndcg@10, kind: gt0, control: dense_only}
+      - {id: H-E, hypothesis: "Canonical not harmed", cohort: canonical, metric: ndcg@10, kind: guard}
+      - {id: H-F, hypothesis: "People not harmed", cohort: person_all, metric: ndcg@10, kind: guard}
+      - {id: H-G, hypothesis: "Temporal not harmed", cohort: temporal_all, metric: ndcg@10, kind: guard}
+      - {id: H-H, hypothesis: "E002b wins retained", cohort: e002b_diagnostic, metric: ndcg@10, kind: per_query_retain}
+  v2:
+    optional: true
+    annotations: data/benchmark_v2/queries_v2.csv
+    runs: {control: runs/e007/v2/control.json, treatment: runs/e007/v2/treatment.json}
+    gates:
+      - {id: H-V2, hypothesis: "v2 structure not harmed", cohort: all, metric: ndcg@10, kind: guard}

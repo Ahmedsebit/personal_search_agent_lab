@@ -1,0 +1,201 @@
+query_id,query,scenario,e003_cohort,field_sensitive,field_sender_cue,field_recipient_cue,field_subject_cue,field_attachment_cue,temporal_explicit,temporal_operator,lexical_form,topic_term,headroom_class,sub_f_ordering,sub_t_ordering,sub_paraphrase_recall_limited,e002b_diagnostic,e002b_cohorts,dup_group,dup_count,n_relevant_inferred,recall50_cap,recall50_at_cap,control_ndcg_at_10,control_recall_at_50,control_mrr,control_precision_at_10,control_recall_at_10,control_dcg_at_10
+query-0000,emails from Hana Okafor,person,field_only,1,1,0,0,0,0,,none,,ceiling,0,0,0,0,none,g000,2,70,0.714286,1,1.0,0.714286,1.0,1.0,0.142857,13.630678
+query-0001,messages about incident,topic,neither,0,0,0,0,0,0,,canonical,incident,ceiling,0,0,0,0,none,g001,2,204,0.245098,1,1.0,0.245098,1.0,1.0,0.04902,13.630678
+query-0002,budget from Lina Chen,person_topic,field_only,1,1,0,0,0,0,,canonical,budget,ceiling,0,0,0,0,none,g002,1,9,1,1,1.0,1.0,1.0,0.9,1.0,29.781462
+query-0003,latest Atlas ranking,recency,temporal_only,0,0,0,0,0,1,latest,canonical,ranking,ordering,0,1,0,0,none,g003,2,25,1,1,0.633638,1.0,1.0,1.0,0.4,6.680802
+query-0004,attachment about OrionX ranking,attachment,field_only,1,0,0,0,1,0,,canonical,ranking,ceiling,0,0,0,0,none,g004,1,6,1,1,1.0,1.0,1.0,0.6,1.0,23.132664
+query-0005,discussion about Cedar migration,thread,neither,0,0,0,0,0,0,,canonical,migration,ceiling,0,0,0,0,none,g005,1,23,1,1,1.0,1.0,1.0,1.0,0.434783,31.804915
+query-0006,decision on OrionX,status,neither,0,0,0,0,0,0,,none,,ceiling,0,0,0,0,none,g006,1,37,1,1,1.0,1.0,1.0,1.0,0.27027,31.804915
+query-0007,latest proposal about Quartz authentication from Leo Martin,mixed,field_and_temporal,1,1,0,0,0,1,latest,canonical,authentication,ceiling,0,0,0,0,none,g007,1,1,1,1,1.0,1.0,1.0,0.1,1.0,7.0
+query-0008,emails from Maya Patel,person,field_only,1,1,0,0,0,0,,none,,ceiling,0,0,0,0,none,g008,1,61,0.819672,1,1.0,0.819672,1.0,1.0,0.163934,13.630678
+query-0009,messages about move-over,topic,neither,0,0,0,0,0,0,,paraphrase,move-over,zero_recall,0,0,1,0,hyphenation|other_targeted|targeted,g009,1,,,0,0.0,0.0,0.0,0.0,0.0,0.0
+query-0010,architecture from O.H.,person_topic,field_only,1,1,0,0,0,0,,paraphrase,architecture,recall_limited,0,0,1,0,initials|alias|safe_alias|other_targeted|targeted,g010,1,8,1,0,0.079795,0.125,0.125,0.1,0.125,2.208254
+query-0011,latest Atlas move-over,recency,temporal_only,0,0,0,0,0,1,latest,paraphrase,move-over,recall_limited,0,0,1,0,hyphenation|other_targeted|targeted,g011,1,,,0,0.0,0.3125,0.052632,0.0,0.0,0.0
+query-0012,attachment about Orion move-over,attachment,field_only,1,0,0,0,1,0,,paraphrase,move-over,ordering,1,0,0,0,hyphenation|other_targeted|targeted,g012,1,5,1,1,0.213986,1.0,0.5,0.1,0.2,4.416508
+query-0013,discussion about Cedar service disruption,thread,neither,0,0,0,0,0,0,,paraphrase,service disruption,recall_limited,0,0,1,0,none,g013,1,30,1,0,0.110046,0.2,0.333333,0.1,0.033333,3.5
+query-0014,review on OrionX,status,neither,0,0,0,0,0,0,,none,,ceiling,0,0,0,0,none,g014,2,42,1,1,1.0,1.0,1.0,1.0,0.238095,31.804915
+query-0015,latest review about Cedar rollout from Maya Patel,mixed,field_and_temporal,1,1,0,0,0,1,latest,paraphrase,rollout,ceiling,0,0,0,0,none,g015,1,1,1,1,1.0,1.0,1.0,0.1,1.0,7.0
+query-0016,emails from Hana Okafor,person,field_only,1,1,0,0,0,0,,none,,ceiling,0,0,0,0,none,g000,2,70,0.714286,1,1.0,0.714286,1.0,1.0,0.142857,13.630678
+query-0017,messages about quality measurement,topic,neither,0,0,0,0,0,0,,paraphrase,quality measurement,zero_recall,0,0,1,0,none,g016,3,,,0,0.0,0.0,0.0,0.0,0.0,0.0
+query-0018,response time from Grace Lee,person_topic,field_only,1,1,0,0,0,0,,paraphrase,response time,recall_limited,0,0,1,0,none,g017,1,8,1,0,0.252943,0.625,1.0,0.1,0.125,7.0
+query-0019,latest Falcone service disruption,recency,temporal_only,0,0,0,0,0,1,latest,paraphrase,service disruption,recall_limited,0,0,1,0,none,g018,1,22,1,0,0.033784,0.272727,0.166667,0.1,0.045455,0.356207
+query-0020,attachment about Cedar move-over,attachment,field_only,1,0,0,0,1,0,,paraphrase,move-over,ordering,1,0,0,0,hyphenation|other_targeted|targeted,g019,14,8,1,1,0.232706,1.0,0.5,0.2,0.25,6.439962
+query-0021,discussion about Falcon service disruption,thread,neither,0,0,0,0,0,0,,paraphrase,service disruption,recall_limited,0,0,1,0,none,g020,1,17,1,0,0.110046,0.235294,0.333333,0.1,0.058824,3.5
+query-0022,postmortem on OrionX,status,neither,0,0,0,0,0,0,,none,,ceiling,0,0,0,0,none,g021,1,36,1,1,1.0,1.0,1.0,1.0,0.277778,31.804915
+query-0023,latest review about Atlas spend plan from Lina Chen,mixed,field_and_temporal,1,1,0,0,0,1,latest,paraphrase,spend plan,ceiling,0,0,0,0,none,g022,1,1,1,1,1.0,1.0,1.0,0.1,1.0,7.0
+query-0024,emails from Aya Nasser,person,field_only,1,1,0,0,0,0,,none,,ceiling,0,0,0,0,none,g023,2,76,0.657895,1,1.0,0.657895,1.0,1.0,0.131579,13.630678
+query-0025,messages about latency,topic,neither,0,0,0,0,0,0,,canonical,latency,ceiling,0,0,0,0,none,g024,3,213,0.234742,1,1.0,0.234742,1.0,1.0,0.046948,13.630678
+query-0026,design from Sam Reed,person_topic,field_only,1,1,0,0,0,0,,canonical,design,ceiling,0,0,0,0,none,g025,1,5,1,1,1.0,1.0,1.0,0.5,1.0,20.639214
+query-0027,latest Nimbus authentication,recency,temporal_only,0,0,0,0,0,1,latest,canonical,authentication,ordering,0,1,0,0,none,g026,1,20,1,1,0.602239,1.0,1.0,1.0,0.5,6.349739
+query-0028,attachment about Cedar migration,attachment,field_only,1,0,0,0,1,0,,canonical,migration,ceiling,0,0,0,0,none,g027,7,8,1,1,1.0,1.0,1.0,0.8,1.0,27.674252
+query-0029,discussion about Atlas budget,thread,neither,0,0,0,0,0,0,,canonical,budget,ceiling,0,0,0,0,none,g028,1,23,1,1,1.0,1.0,1.0,1.0,0.434783,31.804915
+query-0030,proposal on Atlassian,status,neither,0,0,0,0,0,0,,none,,ceiling,0,0,0,0,none,g029,1,50,1,1,1.0,1.0,1.0,1.0,0.2,31.804915
+query-0031,latest review about Quartz incident from Mateo Silva,mixed,field_and_temporal,1,1,0,0,0,1,latest,canonical,incident,ceiling,0,0,0,0,none,g030,1,1,1,1,1.0,1.0,1.0,0.1,1.0,7.0
+query-0032,emails from Aya Nasser,person,field_only,1,1,0,0,0,0,,none,,ceiling,0,0,0,0,none,g023,2,76,0.657895,1,1.0,0.657895,1.0,1.0,0.131579,13.630678
+query-0033,messages about architecture,topic,neither,0,0,0,0,0,0,,paraphrase,architecture,zero_recall,0,0,1,0,none,g031,1,,,0,0.0,0.0,0.0,0.0,0.0,0.0
+query-0034,rollout from Sam Reed,person_topic,field_only,1,1,0,0,0,0,,paraphrase,rollout,recall_limited,0,0,1,0,none,g032,1,10,1,0,0.248908,0.6,0.5,0.2,0.2,7.916508
+query-0035,latest Quartz service disruption,recency,temporal_only,0,0,0,0,0,1,latest,paraphrase,service disruption,recall_limited,0,0,1,0,none,g033,1,,,0,0.0,0.2,0.037037,0.0,0.0,0.0
+query-0036,attachment about Cedar move-over,attachment,field_only,1,0,0,0,1,0,,paraphrase,move-over,ordering,1,0,0,0,hyphenation|other_targeted|targeted,g019,14,8,1,1,0.232706,1.0,0.5,0.2,0.25,6.439962
+query-0037,discussion about Nimbus architecture,thread,neither,0,0,0,0,0,0,,paraphrase,architecture,recall_limited,0,0,1,0,none,g034,1,17,1,0,0.286692,0.352941,0.5,0.3,0.176471,9.118213
+query-0038,decision on Cedar,status,neither,0,0,0,0,0,0,,none,,ceiling,0,0,0,0,none,g035,2,32,1,1,1.0,1.0,1.0,1.0,0.3125,31.804915
+query-0039,latest proposal about Atlas response time from Lina Chen,mixed,field_and_temporal,1,1,0,0,0,1,latest,paraphrase,response time,ceiling,0,0,0,0,none,g036,1,1,1,1,1.0,1.0,1.0,0.1,1.0,7.0
+query-0040,emails from Grace Lee,person,field_only,1,1,0,0,0,0,,none,,ceiling,0,0,0,0,none,g037,1,72,0.694444,1,1.0,0.694444,1.0,1.0,0.138889,13.630678
+query-0041,messages about rollout,topic,neither,0,0,0,0,0,0,,paraphrase,rollout,zero_recall,0,0,1,0,none,g038,2,,,0,0.0,0.0,0.0,0.0,0.0,0.0
+query-0042,data protection from Lina Chen,person_topic,field_only,1,1,0,0,0,0,,paraphrase,data protection,ordering,1,0,0,0,none,g039,1,8,1,1,0.0901,1.0,0.166667,0.1,0.125,2.49345
+query-0043,latest Falcon service disruption,recency,temporal_only,0,0,0,0,0,1,latest,paraphrase,service disruption,recall_limited,0,0,1,0,none,g040,2,17,1,0,0.047422,0.235294,0.333333,0.1,0.058824,0.5
+query-0044,attachment about Cedar move-over,attachment,field_only,1,0,0,0,1,0,,paraphrase,move-over,ordering,1,0,0,0,hyphenation|other_targeted|targeted,g019,14,8,1,1,0.232706,1.0,0.5,0.2,0.25,6.439962
+query-0045,discussion about Quartz data protection,thread,neither,0,0,0,0,0,0,,paraphrase,data protection,recall_limited,0,0,1,0,none,g041,1,,,0,0.0,0.32,0.090909,0.0,0.0,0.0
+query-0046,postmortem on Harbor,status,neither,0,0,0,0,0,0,,none,,ceiling,0,0,0,0,none,g042,1,36,1,1,1.0,1.0,1.0,1.0,0.277778,31.804915
+query-0047,latest update about Harbor service disruption from Grace Lee,mixed,field_and_temporal,1,1,0,0,0,1,latest,paraphrase,service disruption,ordering,0,1,0,0,none,g043,1,1,1,1,0.63093,1.0,0.5,0.1,1.0,4.416508
+query-0048,emails from Jon Bell,person,field_only,1,1,0,0,0,0,,none,,ceiling,0,0,0,0,none,g044,1,52,0.961538,1,1.0,0.961538,1.0,1.0,0.192308,13.630678
+query-0049,messages about latency,topic,neither,0,0,0,0,0,0,,canonical,latency,ceiling,0,0,0,0,none,g024,3,213,0.234742,1,1.0,0.234742,1.0,1.0,0.046948,13.630678
+query-0050,latency from Grace Lee,person_topic,field_only,1,1,0,0,0,0,,canonical,latency,ceiling,0,0,0,0,none,g045,1,8,1,1,1.0,1.0,1.0,0.8,1.0,27.674252
+query-0051,latest Falcone privacy,recency,temporal_only,0,0,0,0,0,1,latest,canonical,privacy,ordering,0,1,0,0,none,g046,1,16,1,1,0.430932,1.0,1.0,1.0,0.625,4.543559
+query-0052,attachment about Cedar authentication,attachment,field_only,1,0,0,0,1,0,,canonical,authentication,ceiling,0,0,0,0,none,g047,1,7,1,1,1.0,1.0,1.0,0.7,1.0,25.465997
+query-0053,discussion about Falcon latency,thread,neither,0,0,0,0,0,0,,canonical,latency,ceiling,0,0,0,0,none,g048,1,24,1,1,1.0,1.0,1.0,1.0,0.416667,31.804915
+query-0054,review on Quartz,status,neither,0,0,0,0,0,0,,none,,ceiling,0,0,0,0,none,g049,3,48,1,1,1.0,1.0,1.0,1.0,0.208333,31.804915
+query-0055,latest proposal about Atlassian deployment from Aya Nasser,mixed,field_and_temporal,1,1,0,0,0,1,latest,canonical,deployment,ceiling,0,0,0,0,none,g050,1,1,1,1,1.0,1.0,1.0,0.1,1.0,7.0
+query-0056,emails from Fatima Ali,person,field_only,1,1,0,0,0,0,,none,,ceiling,0,0,0,1,alias_collision|targeted,g051,1,64,0.78125,1,1.0,0.78125,1.0,1.0,0.15625,13.630678
+query-0057,messages about result ordering,topic,neither,0,0,0,0,0,0,,paraphrase,result ordering,zero_recall,0,0,1,0,none,g052,3,,,0,0.0,0.0,0.0,0.0,0.0,0.0
+query-0058,move-over from OH,person_topic,field_only,1,1,0,0,0,0,,paraphrase,move-over,recall_limited,0,0,1,0,alias|hyphenation|safe_alias|other_targeted|targeted,g053,1,12,1,0,0.066254,0.5,0.111111,0.1,0.083333,2.10721
+query-0059,latest Falcone architecture,recency,temporal_only,0,0,0,0,0,1,latest,paraphrase,architecture,recall_limited,0,0,1,0,none,g054,1,21,1,0,0.040847,0.095238,0.25,0.1,0.047619,0.430677
+query-0060,attachment about Cedar move-over,attachment,field_only,1,0,0,0,1,0,,paraphrase,move-over,ordering,1,0,0,0,hyphenation|other_targeted|targeted,g019,14,8,1,1,0.232706,1.0,0.5,0.2,0.25,6.439962
+query-0061,discussion about Orion spend plan,thread,neither,0,0,0,0,0,0,,paraphrase,spend plan,recall_limited,0,0,1,0,none,g055,1,19,1,0,0.220092,0.157895,1.0,0.1,0.052632,7.0
+query-0062,postmortem on Falcon,status,neither,0,0,0,0,0,0,,none,,ceiling,0,0,0,0,none,g056,1,46,1,1,1.0,1.0,1.0,1.0,0.217391,31.804915
+query-0063,latest update about OrionX response time from Amina Yusuf,mixed,field_and_temporal,1,1,0,0,0,1,latest,paraphrase,response time,ordering,0,1,0,0,none,g057,1,1,1,1,0.5,1.0,0.333333,0.1,1.0,3.5
+query-0064,emails from Noah Williams,person,field_only,1,1,0,0,0,0,,none,,ceiling,0,0,0,0,none,g058,1,83,0.60241,1,1.0,0.60241,1.0,1.0,0.120482,13.630678
+query-0065,messages about quality measurement,topic,neither,0,0,0,0,0,0,,paraphrase,quality measurement,zero_recall,0,0,1,0,none,g016,3,,,0,0.0,0.0,0.0,0.0,0.0,0.0
+query-0066,rollout from Zuri Kamau,person_topic,field_only,1,1,0,0,0,0,,paraphrase,rollout,ordering,1,0,0,0,none,g059,1,7,1,1,0.137438,1.0,0.333333,0.1,0.142857,3.5
+query-0067,latest Falcon service disruption,recency,temporal_only,0,0,0,0,0,1,latest,paraphrase,service disruption,recall_limited,0,0,1,0,none,g040,2,17,1,0,0.047422,0.235294,0.333333,0.1,0.058824,0.5
+query-0068,attachment about Cedar move-over,attachment,field_only,1,0,0,0,1,0,,paraphrase,move-over,ordering,1,0,0,0,hyphenation|other_targeted|targeted,g019,14,8,1,1,0.232706,1.0,0.5,0.2,0.25,6.439962
+query-0069,discussion about Harbor spend plan,thread,neither,0,0,0,0,0,0,,paraphrase,spend plan,recall_limited,0,0,1,0,none,g060,1,27,1,0,0.138862,0.185185,0.5,0.1,0.037037,4.416508
+query-0070,postmortem on Quartz,status,neither,0,0,0,0,0,0,,none,,ceiling,0,0,0,0,none,g061,1,43,1,1,1.0,1.0,1.0,1.0,0.232558,31.804915
+query-0071,latest decision about Nimbus service disruption from Ibrahim Noor,mixed,field_and_temporal,1,1,0,0,0,1,latest,paraphrase,service disruption,ordering,0,1,0,0,none,g062,1,1,1,1,0.63093,1.0,0.5,0.1,1.0,4.416508
+query-0072,emails from Priya Shah,person,field_only,1,1,0,0,0,0,,none,,ceiling,0,0,0,0,none,g063,2,72,0.694444,1,1.0,0.694444,1.0,1.0,0.138889,13.630678
+query-0073,messages about deployment,topic,neither,0,0,0,0,0,0,,canonical,deployment,ceiling,0,0,0,0,none,g064,1,195,0.25641,1,1.0,0.25641,1.0,1.0,0.051282,13.630678
+query-0074,deployment from Maya Patel,person_topic,field_only,1,1,0,0,0,0,,canonical,deployment,ceiling,0,0,0,0,none,g065,1,6,1,1,1.0,1.0,1.0,0.6,1.0,23.132664
+query-0075,latest Atlas ranking,recency,temporal_only,0,0,0,0,0,1,latest,canonical,ranking,ordering,0,1,0,0,none,g003,2,25,1,1,0.633638,1.0,1.0,1.0,0.4,6.680802
+query-0076,attachment about Cedar migration,attachment,field_only,1,0,0,0,1,0,,canonical,migration,ceiling,0,0,0,0,none,g027,7,8,1,1,1.0,1.0,1.0,0.8,1.0,27.674252
+query-0077,discussion about Harbor ranking,thread,neither,0,0,0,0,0,0,,canonical,ranking,ceiling,0,0,0,0,none,g066,1,20,1,1,1.0,1.0,1.0,1.0,0.5,31.804915
+query-0078,update on Cedar,status,neither,0,0,0,0,0,0,,none,,ceiling,0,0,0,0,none,g067,1,37,1,1,1.0,1.0,1.0,1.0,0.27027,31.804915
+query-0079,latest update about Falcone deployment from Fatima Ali,mixed,field_and_temporal,1,1,0,0,0,1,latest,canonical,deployment,ceiling,0,0,0,0,alias_collision|targeted,g068,1,1,1,1,1.0,1.0,1.0,0.1,1.0,7.0
+query-0080,emails from OH,person,field_only,1,1,0,0,0,0,,none,,recall_limited,0,0,0,0,alias|safe_alias|targeted,g069,2,72,0.694444,0,0.649687,0.472222,1.0,0.6,0.083333,8.855678
+query-0081,messages about spend plan,topic,neither,0,0,0,0,0,0,,paraphrase,spend plan,zero_recall,0,0,1,0,none,g070,3,,,0,0.0,0.0,0.0,0.0,0.0,0.0
+query-0082,response time from Amina Yusuf,person_topic,field_only,1,1,0,0,0,0,,paraphrase,response time,recall_limited,0,0,1,0,none,g071,1,,,0,0.0,0.666667,0.090909,0.0,0.0,0.0
+query-0083,latest Nimbus quality measurement,recency,temporal_only,0,0,0,0,0,1,latest,paraphrase,quality measurement,recall_limited,0,0,1,0,none,g072,1,26,1,0,0.031615,0.192308,0.142857,0.1,0.038462,0.333333
+query-0084,attachment about Cedar move-over,attachment,field_only,1,0,0,0,1,0,,paraphrase,move-over,ordering,1,0,0,0,hyphenation|other_targeted|targeted,g019,14,8,1,1,0.232706,1.0,0.5,0.2,0.25,6.439962
+query-0085,discussion about Falcon response time,thread,neither,0,0,0,0,0,0,,paraphrase,response time,recall_limited,0,0,1,0,none,g073,1,24,1,0,0.078398,0.291667,0.166667,0.1,0.041667,2.49345
+query-0086,decision on Cedar,status,neither,0,0,0,0,0,0,,none,,ceiling,0,0,0,0,none,g035,2,32,1,1,1.0,1.0,1.0,1.0,0.3125,31.804915
+query-0087,latest update about OrionX rollout from Chen Wei,mixed,field_and_temporal,1,1,0,0,0,1,latest,paraphrase,rollout,ordering,0,1,0,0,none,g074,1,1,1,1,0.5,1.0,0.333333,0.1,1.0,3.5
+query-0088,emails from Priya Shah,person,field_only,1,1,0,0,0,0,,none,,ceiling,0,0,0,0,none,g063,2,72,0.694444,1,1.0,0.694444,1.0,1.0,0.138889,13.630678
+query-0089,messages about result ordering,topic,neither,0,0,0,0,0,0,,paraphrase,result ordering,zero_recall,0,0,1,0,none,g052,3,,,0,0.0,0.0,0.0,0.0,0.0,0.0
+query-0090,sign-in security from Chen Wei,person_topic,field_only,1,1,0,0,0,0,,paraphrase,sign-in security,ordering,1,0,0,0,none,g075,1,,,0,0.0,1.0,0.090909,0.0,0.0,0.0
+query-0091,latest Falcon result ordering,recency,temporal_only,0,0,0,0,0,1,latest,paraphrase,result ordering,recall_limited,0,0,1,0,none,g076,1,30,1,0,0.031615,0.2,0.142857,0.1,0.033333,0.333333
+query-0092,attachment about Cedar move-over,attachment,field_only,1,0,0,0,1,0,,paraphrase,move-over,ordering,1,0,0,0,hyphenation|other_targeted|targeted,g019,14,8,1,1,0.232706,1.0,0.5,0.2,0.25,6.439962
+query-0093,discussion about Nimbus sign-in security,thread,neither,0,0,0,0,0,0,,paraphrase,sign-in security,recall_limited,0,0,1,0,none,g077,1,,,0,0.0,0.2,0.071429,0.0,0.0,0.0
+query-0094,update on Atlas,status,neither,0,0,0,0,0,0,,none,,ceiling,0,0,0,0,none,g078,2,52,0.961538,1,1.0,0.961538,1.0,1.0,0.192308,31.804915
+query-0095,latest decision about Quartz spend plan from Ben Clarke,mixed,field_and_temporal,1,1,0,0,0,1,latest,paraphrase,spend plan,ceiling,0,0,0,0,none,g079,1,1,1,1,1.0,1.0,1.0,0.1,1.0,7.0
+query-0096,emails from Alice Moreno,person,field_only,1,1,0,0,0,0,,none,,ceiling,0,0,0,0,none,g080,1,53,0.943396,1,1.0,0.943396,1.0,1.0,0.188679,13.630678
+query-0097,messages about latency,topic,neither,0,0,0,0,0,0,,canonical,latency,ceiling,0,0,0,0,none,g024,3,213,0.234742,1,1.0,0.234742,1.0,1.0,0.046948,13.630678
+query-0098,budget from Daniel Kim,person_topic,field_only,1,1,0,0,0,0,,canonical,budget,ceiling,0,0,0,0,none,g081,2,11,1,1,1.0,1.0,1.0,1.0,0.909091,31.804915
+query-0099,latest Atlassian evaluation,recency,temporal_only,0,0,0,0,0,1,latest,canonical,evaluation,ordering,0,1,0,0,none,g082,1,23,1,1,0.59543,1.0,1.0,1.0,0.434783,6.277948
+query-0100,attachment about Cedar migration,attachment,field_only,1,0,0,0,1,0,,canonical,migration,ceiling,0,0,0,0,none,g027,7,8,1,1,1.0,1.0,1.0,0.8,1.0,27.674252
+query-0101,discussion about Orion latency,thread,neither,0,0,0,0,0,0,,canonical,latency,ceiling,0,0,0,0,none,g083,1,19,1,1,1.0,1.0,1.0,1.0,0.526316,31.804915
+query-0102,review on Quartz,status,neither,0,0,0,0,0,0,,none,,ceiling,0,0,0,0,none,g049,3,48,1,1,1.0,1.0,1.0,1.0,0.208333,31.804915
+query-0103,latest proposal about Atlassian incident from Hana Okafor,mixed,field_and_temporal,1,1,0,0,0,1,latest,canonical,incident,ceiling,0,0,0,0,none,g084,1,1,1,1,1.0,1.0,1.0,0.1,1.0,7.0
+query-0104,emails from Sam Reed,person,field_only,1,1,0,0,0,0,,none,,ceiling,0,0,0,0,none,g085,1,76,0.657895,1,1.0,0.657895,1.0,1.0,0.131579,13.630678
+query-0105,messages about service disruption,topic,neither,0,0,0,0,0,0,,paraphrase,service disruption,zero_recall,0,0,1,0,none,g086,1,,,0,0.0,0.0,0.0,0.0,0.0,0.0
+query-0106,architecture from Tariq Aziz,person_topic,field_only,1,1,0,0,0,0,,paraphrase,architecture,ordering,1,0,0,0,none,g087,1,2,1,1,0.193426,1.0,0.125,0.1,0.5,2.208254
+query-0107,latest Atlassian quality measurement,recency,temporal_only,0,0,0,0,0,1,latest,paraphrase,quality measurement,recall_limited,0,0,1,0,none,g088,1,23,1,0,0.152181,0.173913,1.0,0.3,0.130435,1.60453
+query-0108,attachment about Falcon rollout,attachment,field_only,1,0,0,0,1,0,,paraphrase,rollout,ordering,1,0,0,0,none,g089,1,6,1,1,0.282013,1.0,0.5,0.2,0.333333,6.523718
+query-0109,discussion about Quartz spend plan,thread,neither,0,0,0,0,0,0,,paraphrase,spend plan,recall_limited,0,0,1,0,none,g090,1,,,0,0.0,0.1875,0.0625,0.0,0.0,0.0
+query-0110,review on Quartz,status,neither,0,0,0,0,0,0,,none,,ceiling,0,0,0,0,none,g049,3,48,1,1,1.0,1.0,1.0,1.0,0.208333,31.804915
+query-0111,latest update about Cedar data protection from Aya Nasser,mixed,field_and_temporal,1,1,0,0,0,1,latest,paraphrase,data protection,ceiling,0,0,0,0,none,g091,1,1,1,1,1.0,1.0,1.0,0.1,1.0,7.0
+query-0112,emails from Amina Yusuf,person,field_only,1,1,0,0,0,0,,none,,ceiling,0,0,0,0,none,g092,2,80,0.625,1,1.0,0.625,1.0,1.0,0.125,13.630678
+query-0113,messages about data protection,topic,neither,0,0,0,0,0,0,,paraphrase,data protection,zero_recall,0,0,1,0,none,g093,1,,,0,0.0,0.0,0.0,0.0,0.0,0.0
+query-0114,service disruption from Leo Martin,person_topic,field_only,1,1,0,0,0,0,,paraphrase,service disruption,recall_limited,0,0,1,0,none,g094,1,8,1,0,0.329086,0.75,1.0,0.2,0.25,9.10721
+query-0115,latest Orion move-over,recency,temporal_only,0,0,0,0,0,1,latest,paraphrase,move-over,recall_limited,0,0,1,0,hyphenation|other_targeted|targeted,g095,1,23,1,0,0.05984,0.217391,0.5,0.1,0.043478,0.63093
+query-0116,attachment about Cedar move-over,attachment,field_only,1,0,0,0,1,0,,paraphrase,move-over,ordering,1,0,0,0,hyphenation|other_targeted|targeted,g019,14,8,1,1,0.232706,1.0,0.5,0.2,0.25,6.439962
+query-0117,discussion about Quartz response time,thread,neither,0,0,0,0,0,0,,paraphrase,response time,recall_limited,0,0,1,0,none,g096,1,29,1,0,0.283515,0.206897,0.5,0.3,0.103448,9.017169
+query-0118,review on Nimbus,status,neither,0,0,0,0,0,0,,none,,ceiling,0,0,0,0,none,g097,1,35,1,1,1.0,1.0,1.0,1.0,0.285714,31.804915
+query-0119,latest review about Atlas response time from Ethan Brown,mixed,field_and_temporal,1,1,0,0,0,1,latest,paraphrase,response time,ceiling,0,0,0,0,none,g098,1,1,1,1,1.0,1.0,1.0,0.1,1.0,7.0
+query-0120,emails from Amina Yusuf,person,field_only,1,1,0,0,0,0,,none,,ceiling,0,0,0,0,none,g092,2,80,0.625,1,1.0,0.625,1.0,1.0,0.125,13.630678
+query-0121,messages about incident,topic,neither,0,0,0,0,0,0,,canonical,incident,ceiling,0,0,0,0,none,g001,2,204,0.245098,1,1.0,0.245098,1.0,1.0,0.04902,13.630678
+query-0122,budget from Daniel Kim,person_topic,field_only,1,1,0,0,0,0,,canonical,budget,ceiling,0,0,0,0,none,g081,2,11,1,1,1.0,1.0,1.0,1.0,0.909091,31.804915
+query-0123,latest Orion incident,recency,temporal_only,0,0,0,0,0,1,latest,canonical,incident,ordering,0,1,0,0,none,g099,1,25,1,1,0.633638,1.0,1.0,1.0,0.4,6.680802
+query-0124,attachment about Cedar migration,attachment,field_only,1,0,0,0,1,0,,canonical,migration,ceiling,0,0,0,0,none,g027,7,8,1,1,1.0,1.0,1.0,0.8,1.0,27.674252
+query-0125,discussion about Quartz ranking,thread,neither,0,0,0,0,0,0,,canonical,ranking,ceiling,0,0,0,0,none,g100,1,18,1,1,1.0,1.0,1.0,1.0,0.555556,31.804915
+query-0126,decision on Falcon,status,neither,0,0,0,0,0,0,,none,,ceiling,0,0,0,0,none,g101,1,35,1,1,1.0,1.0,1.0,1.0,0.285714,31.804915
+query-0127,latest update about Atlassian design from Sofia Rossi,mixed,field_and_temporal,1,1,0,0,0,1,latest,canonical,design,ceiling,0,0,0,0,none,g102,1,1,1,1,1.0,1.0,1.0,0.1,1.0,7.0
+query-0128,emails from Ben Clarke,person,field_only,1,1,0,0,0,0,,none,,ceiling,0,0,0,0,none,g103,1,64,0.78125,1,1.0,0.78125,1.0,1.0,0.15625,13.630678
+query-0129,messages about result ordering,topic,neither,0,0,0,0,0,0,,paraphrase,result ordering,zero_recall,0,0,1,0,none,g052,3,,,0,0.0,0.0,0.0,0.0,0.0,0.0
+query-0130,response time from Mateo Silva,person_topic,field_only,1,1,0,0,0,0,,paraphrase,response time,recall_limited,0,0,1,0,none,g104,1,7,1,0,0.079457,0.571429,0.1,0.1,0.142857,2.023454
+query-0131,latest Atlassian response time,recency,temporal_only,0,0,0,0,0,1,latest,paraphrase,response time,recall_limited,0,0,1,0,none,g105,1,24,1,0,0.047422,0.125,0.333333,0.1,0.041667,0.5
+query-0132,attachment about Cedar move-over,attachment,field_only,1,0,0,0,1,0,,paraphrase,move-over,ordering,1,0,0,0,hyphenation|other_targeted|targeted,g019,14,8,1,1,0.232706,1.0,0.5,0.2,0.25,6.439962
+query-0133,discussion about Falcone response time,thread,neither,0,0,0,0,0,0,,paraphrase,response time,recall_limited,0,0,1,0,none,g106,1,,,0,0.0,0.136364,0.058824,0.0,0.0,0.0
+query-0134,proposal on Falcon,status,neither,0,0,0,0,0,0,,none,,ceiling,0,0,0,0,none,g107,2,53,0.943396,1,1.0,0.943396,1.0,1.0,0.188679,31.804915
+query-0135,latest proposal about Cedar sign-in security from Grace Lee,mixed,field_and_temporal,1,1,0,0,0,1,latest,paraphrase,sign-in security,ceiling,0,0,0,0,none,g108,1,1,1,1,1.0,1.0,1.0,0.1,1.0,7.0
+query-0136,emails from Lina Chen,person,field_only,1,1,0,0,0,0,,none,,ceiling,0,0,0,0,none,g109,1,50,1,1,1.0,1.0,1.0,1.0,0.2,13.630678
+query-0137,messages about quality measurement,topic,neither,0,0,0,0,0,0,,paraphrase,quality measurement,zero_recall,0,0,1,0,none,g016,3,,,0,0.0,0.0,0.0,0.0,0.0,0.0
+query-0138,rollout from Priya Shah,person_topic,field_only,1,1,0,0,0,0,,paraphrase,rollout,recall_limited,0,0,1,0,none,g110,1,,,0,0.0,0.375,0.071429,0.0,0.0,0.0
+query-0139,latest Cedar result ordering,recency,temporal_only,0,0,0,0,0,1,latest,paraphrase,result ordering,recall_limited,0,0,1,0,none,g111,1,14,1,0,0.063704,0.142857,0.166667,0.2,0.142857,0.671672
+query-0140,attachment about Cedar move-over,attachment,field_only,1,0,0,0,1,0,,paraphrase,move-over,ordering,1,0,0,0,hyphenation|other_targeted|targeted,g019,14,8,1,1,0.232706,1.0,0.5,0.2,0.25,6.439962
+query-0141,discussion about Nimbus response time,thread,neither,0,0,0,0,0,0,,paraphrase,response time,recall_limited,0,0,1,0,none,g112,1,20,1,0,0.129875,0.4,0.111111,0.2,0.1,4.130664
+query-0142,proposal on Nimbus,status,neither,0,0,0,0,0,0,,none,,ceiling,0,0,0,0,none,g113,1,37,1,1,1.0,1.0,1.0,1.0,0.27027,31.804915
+query-0143,latest review about Falcon response time from Chen Wei,mixed,field_and_temporal,1,1,0,0,0,1,latest,paraphrase,response time,ceiling,0,0,0,0,none,g114,1,1,1,1,1.0,1.0,1.0,0.1,1.0,7.0
+query-0144,emails from Omar Hussein,person,field_only,1,1,0,0,0,0,,none,,ceiling,0,0,0,0,none,g115,1,64,0.78125,1,1.0,0.78125,1.0,1.0,0.15625,13.630678
+query-0145,messages about authentication,topic,neither,0,0,0,0,0,0,,canonical,authentication,ceiling,0,0,0,0,none,g116,1,167,0.299401,1,1.0,0.299401,1.0,1.0,0.05988,13.630678
+query-0146,budget from Mariam Musa,person_topic,field_only,1,1,0,0,0,0,,canonical,budget,ceiling,0,0,0,0,none,g117,1,11,1,1,1.0,1.0,1.0,1.0,0.909091,31.804915
+query-0147,latest Falcon evaluation,recency,temporal_only,0,0,0,0,0,1,latest,canonical,evaluation,ordering,0,1,0,0,none,g118,1,27,1,1,0.676016,1.0,1.0,1.0,0.37037,7.127619
+query-0148,attachment about Cedar migration,attachment,field_only,1,0,0,0,1,0,,canonical,migration,ceiling,0,0,0,0,none,g027,7,8,1,1,1.0,1.0,1.0,0.8,1.0,27.674252
+query-0149,discussion about Falcone latency,thread,neither,0,0,0,0,0,0,,canonical,latency,ceiling,0,0,0,0,none,g119,1,22,1,1,1.0,1.0,1.0,1.0,0.454545,31.804915
+query-0150,review on OrionX,status,neither,0,0,0,0,0,0,,none,,ceiling,0,0,0,0,none,g014,2,42,1,1,1.0,1.0,1.0,1.0,0.238095,31.804915
+query-0151,latest review about Atlas incident from Eva Novak,mixed,field_and_temporal,1,1,0,0,0,1,latest,canonical,incident,ceiling,0,0,0,0,none,g120,1,1,1,1,1.0,1.0,1.0,0.1,1.0,7.0
+query-0152,emails from Ali,person,field_only,1,1,0,0,0,0,,none,,recall_limited,0,0,0,0,alias|safe_alias|targeted,g121,1,66,0.757576,0,0.469,0.636364,1.0,0.3,0.045455,6.392789
+query-0153,messages about spend plan,topic,neither,0,0,0,0,0,0,,paraphrase,spend plan,zero_recall,0,0,1,0,none,g070,3,,,0,0.0,0.0,0.0,0.0,0.0,0.0
+query-0154,spend plan from Ally,person_topic,field_only,1,1,0,0,0,0,,paraphrase,spend plan,recall_limited,0,0,1,0,alias|safe_alias|targeted,g122,1,10,1,0,0.283713,0.9,1.0,0.2,0.2,9.023454
+query-0155,latest Falcon response time,recency,temporal_only,0,0,0,0,0,1,latest,paraphrase,response time,recall_limited,0,0,1,0,none,g123,2,24,1,0,0.033784,0.291667,0.166667,0.1,0.041667,0.356207
+query-0156,attachment about Cedar move-over,attachment,field_only,1,0,0,0,1,0,,paraphrase,move-over,ordering,1,0,0,0,hyphenation|other_targeted|targeted,g019,14,8,1,1,0.232706,1.0,0.5,0.2,0.25,6.439962
+query-0157,discussion about Quartz sign-in security,thread,neither,0,0,0,0,0,0,,paraphrase,sign-in security,recall_limited,0,0,1,0,none,g124,1,18,1,0,0.399569,0.333333,1.0,0.3,0.166667,12.708254
+query-0158,postmortem on Atlassian,status,neither,0,0,0,0,0,0,,none,,ceiling,0,0,0,0,none,g125,1,46,1,1,1.0,1.0,1.0,1.0,0.217391,31.804915
+query-0159,latest review about Cedar result ordering from Ethan Brown,mixed,field_and_temporal,1,1,0,0,0,1,latest,paraphrase,result ordering,ceiling,0,0,0,0,none,g126,1,1,1,1,1.0,1.0,1.0,0.1,1.0,7.0
+query-0160,emails from OH,person,field_only,1,1,0,0,0,0,,none,,recall_limited,0,0,0,0,alias|safe_alias|targeted,g069,2,72,0.694444,0,0.649687,0.472222,1.0,0.6,0.083333,8.855678
+query-0161,messages about spend plan,topic,neither,0,0,0,0,0,0,,paraphrase,spend plan,zero_recall,0,0,1,0,none,g070,3,,,0,0.0,0.0,0.0,0.0,0.0,0.0
+query-0162,spend plan from Mariam Musa,person_topic,field_only,1,1,0,0,0,0,,paraphrase,spend plan,recall_limited,0,0,1,0,none,g127,1,11,1,0,0.136985,0.727273,0.142857,0.2,0.181818,4.356787
+query-0163,latest Falcone rollout,recency,temporal_only,0,0,0,0,0,1,latest,paraphrase,rollout,recall_limited,0,0,1,0,none,g128,1,,,0,0.0,0.409091,0.076923,0.0,0.0,0.0
+query-0164,attachment about Cedar move-over,attachment,field_only,1,0,0,0,1,0,,paraphrase,move-over,ordering,1,0,0,0,hyphenation|other_targeted|targeted,g019,14,8,1,1,0.232706,1.0,0.5,0.2,0.25,6.439962
+query-0165,discussion about Atlas move-over,thread,neither,0,0,0,0,0,0,,paraphrase,move-over,recall_limited,0,0,1,0,hyphenation|other_targeted|targeted,g129,1,,,0,0.0,0.3125,0.052632,0.0,0.0,0.0
+query-0166,proposal on Falcon,status,neither,0,0,0,0,0,0,,none,,ceiling,0,0,0,0,none,g107,2,53,0.943396,1,1.0,0.943396,1.0,1.0,0.188679,31.804915
+query-0167,latest review about Nimbus response time from Zuri Kamau,mixed,field_and_temporal,1,1,0,0,0,1,latest,paraphrase,response time,ceiling,0,0,0,0,none,g130,1,1,1,1,1.0,1.0,1.0,0.1,1.0,7.0
+query-0168,emails from Alice Morgan,person,field_only,1,1,0,0,0,0,,none,,ceiling,0,0,0,0,none,g131,1,66,0.757576,1,1.0,0.757576,1.0,1.0,0.151515,13.630678
+query-0169,messages about evaluation,topic,neither,0,0,0,0,0,0,,canonical,evaluation,ceiling,0,0,0,0,none,g132,1,219,0.228311,1,1.0,0.228311,1.0,1.0,0.045662,13.630678
+query-0170,budget from Sam Reed,person_topic,field_only,1,1,0,0,0,0,,canonical,budget,ceiling,0,0,0,0,none,g133,1,16,1,1,1.0,1.0,1.0,1.0,0.625,31.804915
+query-0171,latest Falcon authentication,recency,temporal_only,0,0,0,0,0,1,latest,canonical,authentication,ordering,0,1,0,0,none,g134,1,18,1,1,0.651078,1.0,1.0,1.0,0.555556,6.864676
+query-0172,attachment about Cedar migration,attachment,field_only,1,0,0,0,1,0,,canonical,migration,ceiling,0,0,0,0,none,g027,7,8,1,1,1.0,1.0,1.0,0.8,1.0,27.674252
+query-0173,discussion about Atlassian deployment,thread,neither,0,0,0,0,0,0,,canonical,deployment,ceiling,0,0,0,0,none,g135,1,29,1,1,1.0,1.0,1.0,1.0,0.344828,31.804915
+query-0174,decision on Falcone,status,neither,0,0,0,0,0,0,,none,,ceiling,0,0,0,0,none,g136,1,41,1,1,1.0,1.0,1.0,1.0,0.243902,31.804915
+query-0175,latest proposal about Falcone design from Ethan Brown,mixed,field_and_temporal,1,1,0,0,0,1,latest,canonical,design,ceiling,0,0,0,0,none,g137,1,1,1,1,1.0,1.0,1.0,0.1,1.0,7.0
+query-0176,emails from Eva Novak,person,field_only,1,1,0,0,0,0,,none,,ceiling,0,0,0,0,none,g138,1,69,0.724638,1,1.0,0.724638,1.0,1.0,0.144928,13.630678
+query-0177,messages about sign-in security,topic,neither,0,0,0,0,0,0,,paraphrase,sign-in security,zero_recall,0,0,1,0,none,g139,1,,,0,0.0,0.0,0.0,0.0,0.0,0.0
+query-0178,sign-in security from Hana Okafor,person_topic,field_only,1,1,0,0,0,0,,paraphrase,sign-in security,recall_limited,0,0,1,0,none,g140,1,,,0,0.0,0.571429,0.027778,0.0,0.0,0.0
+query-0179,latest Falcon response time,recency,temporal_only,0,0,0,0,0,1,latest,paraphrase,response time,recall_limited,0,0,1,0,none,g123,2,24,1,0,0.033784,0.291667,0.166667,0.1,0.041667,0.356207
+query-0180,attachment about Cedar move-over,attachment,field_only,1,0,0,0,1,0,,paraphrase,move-over,ordering,1,0,0,0,hyphenation|other_targeted|targeted,g019,14,8,1,1,0.232706,1.0,0.5,0.2,0.25,6.439962
+query-0181,discussion about Atlassian architecture,thread,neither,0,0,0,0,0,0,,paraphrase,architecture,recall_limited,0,0,1,0,none,g141,1,24,1,0,0.085143,0.208333,0.2,0.1,0.041667,2.70797
+query-0182,proposal on Cedar,status,neither,0,0,0,0,0,0,,none,,ceiling,0,0,0,0,none,g142,1,48,1,1,1.0,1.0,1.0,1.0,0.208333,31.804915
+query-0183,latest decision about Falcon rollout from Ally,mixed,field_and_temporal,1,1,0,0,0,1,latest,paraphrase,rollout,ceiling,0,0,0,0,alias|safe_alias|targeted,g143,1,1,1,1,1.0,1.0,1.0,0.1,1.0,7.0
+query-0184,emails from Nadia Said,person,field_only,1,1,0,0,0,0,,none,,ceiling,0,0,0,0,none,g144,2,79,0.632911,1,1.0,0.632911,1.0,1.0,0.126582,13.630678
+query-0185,messages about rollout,topic,neither,0,0,0,0,0,0,,paraphrase,rollout,zero_recall,0,0,1,0,none,g038,2,,,0,0.0,0.0,0.0,0.0,0.0,0.0
+query-0186,rollout from Fatima Ali,person_topic,field_only,1,1,0,0,0,0,,paraphrase,rollout,recall_limited,0,0,1,1,alias_collision|targeted,g145,1,8,1,0,0.362204,0.875,0.5,0.3,0.375,10.023718
+query-0187,latest Harbor architecture,recency,temporal_only,0,0,0,0,0,1,latest,paraphrase,architecture,recall_limited,0,0,1,0,none,g146,1,24,1,0,0.176051,0.291667,1.0,0.3,0.125,1.856207
+query-0188,attachment about Cedar move-over,attachment,field_only,1,0,0,0,1,0,,paraphrase,move-over,ordering,1,0,0,0,hyphenation|other_targeted|targeted,g019,14,8,1,1,0.232706,1.0,0.5,0.2,0.25,6.439962
+query-0189,discussion about Atlassian quality measurement,thread,neither,0,0,0,0,0,0,,paraphrase,quality measurement,recall_limited,0,0,1,0,none,g147,1,23,1,0,0.353144,0.173913,1.0,0.3,0.130435,11.231708
+query-0190,update on Atlassian,status,neither,0,0,0,0,0,0,,none,,ceiling,0,0,0,0,none,g148,1,38,1,1,1.0,1.0,1.0,1.0,0.263158,31.804915
+query-0191,latest postmortem about Quartz sign-in security from Leo Martin,mixed,field_and_temporal,1,1,0,0,0,1,latest,paraphrase,sign-in security,ceiling,0,0,0,0,none,g149,1,1,1,1,1.0,1.0,1.0,0.1,1.0,7.0
+query-0192,emails from Nadia Said,person,field_only,1,1,0,0,0,0,,none,,ceiling,0,0,0,0,none,g144,2,79,0.632911,1,1.0,0.632911,1.0,1.0,0.126582,13.630678
+query-0193,messages about budget,topic,neither,0,0,0,0,0,0,,canonical,budget,ceiling,0,0,0,0,none,g150,1,224,0.223214,1,1.0,0.223214,1.0,1.0,0.044643,13.630678
+query-0194,budget from Eva Novak,person_topic,field_only,1,1,0,0,0,0,,canonical,budget,ceiling,0,0,0,0,none,g151,1,7,1,1,1.0,1.0,1.0,0.7,1.0,25.465997
+query-0195,latest OrionX budget,recency,temporal_only,0,0,0,0,0,1,latest,canonical,budget,ordering,0,1,0,0,none,g152,1,24,1,1,0.430932,1.0,1.0,1.0,0.416667,4.543559
+query-0196,attachment about Cedar migration,attachment,field_only,1,0,0,0,1,0,,canonical,migration,ceiling,0,0,0,0,none,g027,7,8,1,1,1.0,1.0,1.0,0.8,1.0,27.674252
+query-0197,discussion about Harbor deployment,thread,neither,0,0,0,0,0,0,,canonical,deployment,ceiling,0,0,0,0,none,g153,1,21,1,1,1.0,1.0,1.0,1.0,0.47619,31.804915
+query-0198,update on Atlas,status,neither,0,0,0,0,0,0,,none,,ceiling,0,0,0,0,none,g078,2,52,0.961538,1,1.0,0.961538,1.0,1.0,0.192308,31.804915
+query-0199,latest update about Orion evaluation from Ben Clarke,mixed,field_and_temporal,1,1,0,0,0,1,latest,canonical,evaluation,ceiling,0,0,0,0,none,g154,1,1,1,1,1.0,1.0,1.0,0.1,1.0,7.0

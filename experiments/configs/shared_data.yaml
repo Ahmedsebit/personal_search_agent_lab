@@ -1,0 +1,21 @@
+# Shared by E004–E008 runs. Same paths and control wiring as the E003 configs.
+data:
+  emails: datasets/synthetic/emails.jsonl
+  field_map: {}
+control:                                       # frozen E001/E002b pieces — VERIFY against your repo
+  factory: packages.search.retrieval.e003_repository:build_control
+  normalizer: control
+  tokenizer: packages.search.retrieval.bm25:tokenize
+  k1: 1.5
+  b: 0.75
+gain_mode: exponential    # matches the frozen E002b report
+frozen_control: experiments/frozen/frozen_control.yaml
+cache_dir: runs/cache
+benchmarks:
+  v1:
+    annotations: docs/experiments/e003/e003-query-annotations.csv
+    qrels: datasets/benchmarks/judgments.jsonl
+  v2:                                          # produced by scripts/build_benchmark_v2.py (E005)
+    annotations: data/benchmark_v2/queries_v2.csv
+    qrels: data/benchmark_v2/qrels_v2.jsonl
+    annotations_sha256: null                   # paste the hash from the v2 benchmark card to freeze it

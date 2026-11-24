@@ -1,0 +1,9 @@
+# The single source of truth for "the current frozen control".
+# Update ONLY after an experiment's decision is recorded, and append to history.
+current:
+  id: E002b
+  e003_arm: control          # E003 decision → control | e003_f | e003_t | e003_ft
+  adopted_stages: []         # E004+ decisions append their stage spec here, e.g.
+                             #   - {type: synonym_expansion, bidirectional: true, mode: append}
+history:
+  - {date: 2026-11-18, id: E002b, decision: "E002b adopted; all 7 preregistered gates passed"}

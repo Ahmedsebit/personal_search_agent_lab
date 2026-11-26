@@ -34,14 +34,16 @@ pip install -e '.[dev]'
 python scripts/generate_dataset.py --emails 2000 --queries 200 --seed 42
 ```
 
-## Run experiments
+## Run E001-E008 step by step
 
-```bash
-python scripts/run_experiment.py --config experiments/configs/001_bm25.yaml
-python scripts/run_experiment.py --config experiments/configs/002_dense.yaml
-python scripts/run_experiment.py --config experiments/configs/003_hybrid.yaml
-python scripts/run_experiment.py --config experiments/configs/004_hybrid_reranker.yaml
-```
+Follow the [E001-E008 step-by-step guide](docs/experiments/step-by-step-e001-e008.md)
+for setup, dataset generation, every experiment command, expected artifacts,
+and the decision checkpoints between experiments. The sequence includes E002b
+and keeps earlier baselines frozen.
+
+The original Milestone 1 configs `002_dense.yaml`, `003_hybrid.yaml`, and
+`004_hybrid_reranker.yaml` remain available as dependency-light demos; their
+numbers are not the research experiment IDs.
 
 ## Tests and quality checks
 
@@ -79,18 +81,9 @@ Read [`docs/implementation/code-walkthrough.md`](docs/implementation/code-walkth
 
 Use [`docs/learning/README.md`](docs/learning/README.md) as the guided learning path. It covers tokenization, inverted statistics, IDF, term-frequency saturation, document-length normalization, and full BM25 ranked search with behavioral tests and baseline boundaries.
 
-## E003-E008 research experiments
+## Research implementation references
 
-The [E003-E008 integration guide](README_E003_E008.md) adds field-aware and temporal
-retrieval, synonym expansion, structured-query benchmarks, semantic dense retrieval,
-hybrid fusion, and cross-encoder reranking. Existing E001-E002b code and the original
-hashing-dense baseline remain available.
-
-Install the base and test dependencies with `python -m pip install -e ".[dev]"`.
-Start with `python scripts\run_e003.py --config experiments\configs\000_e003_control.yaml`;
-the control must reproduce the frozen E002b metrics before evaluating new arms.
-Record each experiment's decision before updating the frozen control or proceeding.
-
-Real E006-E008 model runs additionally require
-`python -m pip install -e ".[models]"` and downloads of the preregistered public models.
-These dependencies and model downloads are not needed for lexical runs or unit tests.
+The [E003 integration reference](E003_INTEGRATION.md) documents control wiring
+and parity. The [E004-E008 roadmap](docs/experiments/e004-e008-roadmap.md) and
+[pipeline learning guide](docs/learning/14-composable-pipeline-e004-e008.md)
+explain the later stages. Use the consolidated guide above for execution order.

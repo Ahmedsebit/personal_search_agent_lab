@@ -1,6 +1,9 @@
-# E001 Learning Notes
+# E001-E008 Learning Path
 
-These notes are intended for implementing E001 manually rather than copying the finished retriever.
+For commands, expected outputs, and decision checkpoints, follow the
+[E001-E008 step-by-step guide](../experiments/step-by-step-e001-e008.md).
+These supporting notes explain how to implement and understand each mechanism,
+starting with E001 rather than copying the finished retriever.
 
 1. [Tokenization](01-tokenization.md)
 2. [Inverted statistics](02-inverted-statistics.md)
@@ -11,9 +14,12 @@ These notes are intended for implementing E001 manually rather than copying the 
 7. [Evaluation metrics](07-evaluation-metrics.md)
 8. [Running and analyzing E001](08-running-and-analyzing-e001.md)
 
-Each guide explains the purpose, implementation shape, deliberate baseline limitations, tests, and readiness checks for the next exercise.
 9. [E002 query normalization](09-query-normalization-and-e002.md)
 10. [Comparing E001 and E002](10-comparing-e001-e002.md)
-12. [Running and validating E002b](12-running-and-validating-e002b.md)
-13. [Running and validating E003](13-running-and-validating-e003.md)
-14. [Composable pipelines for E004-E008](14-composable-pipeline-e004-e008.md)
+11. [Running and validating E002b](12-running-and-validating-e002b.md)
+12. [Running and validating E003](13-running-and-validating-e003.md)
+13. [Composable pipelines for E004-E008](14-composable-pipeline-e004-e008.md)
+
+Each guide explains the purpose, implementation shape, deliberate baseline
+limitations, tests, and readiness checks for the next exercise. Existing
+filenames retain their historical numbering so links remain stable.

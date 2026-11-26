@@ -1,5 +1,9 @@
 # E003 integration — field-aware and temporal lexical retrieval
 
+For the complete execution sequence, use the
+[E001-E008 step-by-step guide](docs/experiments/step-by-step-e001-e008.md).
+This document is the supporting E003 integration and wiring reference.
+
 This package is integrated into the Personal Search & Agent Lab repository. It adds E003 without changing the frozen E001, E002 or E002b retrieval algorithms.
 
 ## New files

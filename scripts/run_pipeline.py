@@ -14,9 +14,11 @@ import os
 import sys
 import time
 from pathlib import Path
+from statistics import median
 
 import yaml
 
+from packages.eval.cost import latency_summary, machine_fingerprint
 from packages.eval.e003_metrics import compute_metrics, control_parity
 from packages.search.data.e003_corpus import (
     load_annotations,
@@ -41,7 +43,12 @@ def main():
     ap.add_argument("--config", required=True)
     ap.add_argument("--arm", required=True, help="control or a key under 'arms' in the config")
     ap.add_argument("--benchmark", default="v1", help="key under 'benchmarks' in the config")
+    ap.add_argument("--warmup", type=int, default=5, help="Untimed warm-up queries")
+    ap.add_argument("--repeats", type=int, default=3, help="Timed repeats; record their median")
     a = ap.parse_args()
+    if a.warmup < 0 or a.repeats < 1:
+        ap.error("--warmup must be nonnegative and --repeats must be positive")
+    os.environ.setdefault("CUDA_VISIBLE_DEVICES", "")
     cfg = yaml.safe_load(Path(a.config).read_text(encoding="utf-8"))
     shared = yaml.safe_load(
         Path(cfg.get("shared", "experiments/configs/shared_data.yaml")).read_text(encoding="utf-8")
@@ -85,16 +92,23 @@ def main():
         cache_dir=shared.get("cache_dir", "runs/cache"),
     )
     spec = {"base": "frozen_control", "stages": []} if a.arm == "control" else cfg["arms"][a.arm]
+    build_start = time.perf_counter()
     pipe, base_spec = build_pipeline(
         spec, ctx, shared.get("frozen_control", "experiments/frozen/frozen_control.yaml")
     )
+    for q in ann[: a.warmup]:
+        pipe.search(q["query"], cfg.get("depth", 50))
+    build_ms = (time.perf_counter() - build_start) * 1000
 
     gain = shared.get("gain_mode", "linear")
     per_query = []
     for q in ann:
-        t0 = time.perf_counter()
-        ranked, meta = pipe.search(q["query"], cfg.get("depth", 50))
-        ms = (time.perf_counter() - t0) * 1000
+        times = []
+        for _ in range(a.repeats):
+            t0 = time.perf_counter()
+            ranked, meta = pipe.search(q["query"], cfg.get("depth", 50))
+            times.append((time.perf_counter() - t0) * 1000)
+        ms = median(times)
         ids = [d for d, _ in ranked]
         per_query.append(
             {
@@ -126,6 +140,13 @@ def main():
         "annotation_sha256": sha(bench["annotations"]),
         "control_parity": parity,
         "smoke": smoke,
+        "timing": {
+            "machine": machine_fingerprint(),
+            "warmup": a.warmup,
+            "repeats": a.repeats,
+            "build_and_warmup_ms": build_ms,
+            "summary": latency_summary(per_query),
+        },
         "per_query": per_query,
     }
     path = os.path.join(out_dir, f"{a.arm}.json")

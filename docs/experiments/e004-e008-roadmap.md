@@ -1,4 +1,9 @@
-# E004–E008 roadmap (preregistered 2026-11-24, provisional control)
+# E004–E009 roadmap
+
+E004-E008 were preregistered on 2026-11-24 with a provisional control.
+E009 and the U1-U3 amendment were preregistered on 2026-11-27.
+For execution order, follow the
+[E001-E009 step-by-step guide](step-by-step-e001-e008.md).
 
 | ID | Experiment | Mechanism | Target cohort (v1 unless stated) | Primary improvement gate |
 | --- | --- | --- | --- | --- |
@@ -7,8 +12,12 @@
 | E006 | Dense retrieval alone | CPU-only sentence embedding, exact cosine | Paraphrase and recall-limited | Paraphrase ΔNDCG@10 > 0, recall-limited ΔRecall@50 > 0 |
 | E007 | Hybrid | Reciprocal-rank fusion of the frozen control and dense (k = 60, depth 100) | All 200 | All ΔNDCG@10 > 0 vs control **and** vs dense alone |
 | E008 | Re-ranking | Cross-encoder re-scores the frozen control's top 50 | All 200 | All ΔNDCG@10 > 0; Recall@50 unchanged by construction |
+| E009 | Grounded answers + layered judges | Extractive answer from the top 5; 7 judges in 3 layers (safety stops first) | v3: clean, planted-failure and real answers | Planted safety failures caught ≥ 90%, ≤ 5% false safety alarms; see `e009/e009-preregistration.md` |
+
 
 Automatic query expansion (pseudo-relevance feedback) was considered and dropped by decision on 2026-11-24.
+
+**Benchmark v3** (`benchmark-v3/benchmark-v3-plan.md`) is the main benchmark from E009 on. It is cleaned (155 unique gold queries) and extended with human-checked silver scenarios: recipient, subject, date range, attachment files, newest and oldest. E003–E008 stay on v1.
 
 ## Rules that apply to every experiment
 
@@ -24,9 +33,17 @@ Automatic query expansion (pseudo-relevance feedback) was considered and dropped
 | NOT_ADOPTED_FRAGILE | Improvement holds only with duplicate queries counted each time | Don't adopt |
 | NOT_ADOPTED_GUARDRAIL_FAILURE | A protection gate failed | Don't adopt; analyse the regressions first |
 | NULL_RESULT | Nothing broke, target didn't improve | Record it; don't adopt |
-| NOT_EVALUABLE | The cohort is too small or missing | Record it; extend the benchmark |
+| NOT_EVALUABLE | The cohort is too small or missing, or every improvement gate was blocked | Record it; extend or validate the benchmark |
+| HOLD_COST | Quality passes, latency or cost-benefit fails (U2) | Don't adopt; plan a cheaper variant under a new ID |
+| HOLD_COST_UNVERIFIED | Quality passes, timing missing or from different machines (U2) | Re-time both arms on one machine |
+
+Informational gates are reported but never affect a verdict.
 
 6. Re-running with changed parameters requires a new ID (for example, E004b).
+
+## Amendment U1–U3 (2026-11-27, before any run)
+
+See `u1-u3-amendment-preregistration.md`. It adds paraphrase-robustness gates on a new twin benchmark (`pt`), latency and cost-benefit gates, and a human check of E005's silver labels. No existing gate was changed.
 
 ## Known limitations, stated up front
 

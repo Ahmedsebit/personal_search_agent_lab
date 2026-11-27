@@ -15,3 +15,12 @@ evaluations:
       - {id: D-C, hypothesis: "H3 dense alone not worse overall", cohort: all, metric: ndcg@10, kind: guard}
       - {id: D-D, hypothesis: "H4 dense alone not worse on people", cohort: person_all, metric: ndcg@10, kind: guard}
       - {id: D-E, hypothesis: "E002b wins retained", cohort: e002b_diagnostic, metric: ndcg@10, kind: per_query_retain}
+      - {id: C-1, hypothesis: "U2 latency within budget", cohort: all, kind: latency_budget, stat: p95, max_ms: 150}
+      - {id: C-2, hypothesis: "U2 quality gain worth the added time", cohort: all, metric: ndcg@10, kind: gain_per_latency, min_gain_per_100ms: 0.01}
+  pt:
+    annotations: data/benchmark_pt/queries_pt.csv
+    runs: {control: runs/e006/pt/control.json, treatment: runs/e006/pt/treatment.json}
+    gates:
+      - {id: P-A, hypothesis: "U1 dense narrows the wording gap", cohort: all, metric: ndcg@10, kind: family_gt0, stat: abs_gap, min_n: 30}
+      - {id: P-B, hypothesis: "U1 dense raises the worst wording", cohort: all, metric: ndcg@10, kind: family_gt0, stat: worst, min_n: 30}
+      - {id: P-C, hypothesis: "U1 top-10 agreement across wordings (descriptive)", cohort: all, metric: ndcg@10, kind: family_gt0, stat: overlap, min_n: 30, informational: true}

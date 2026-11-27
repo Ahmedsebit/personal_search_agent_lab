@@ -53,3 +53,8 @@ The E003 audit found that all 28 zero-NDCG queries, and 80 of the 83 queries bel
 ## Expectation
 
 S-D carries the main risk. Adding a paraphrase to an already-perfect canonical query could dilute it.
+
+
+## Amendment U1–U3 (2026-11-27)
+
+Gates added to `e004-gates.yaml` before any run. See `../u1-u3-amendment-preregistration.md`. Adds latency gate C-1 (p95 added ≤ 20 ms) and informational paraphrase-twin gates P-1/P-2 (by construction, because the lexicon is benchmark-derived).

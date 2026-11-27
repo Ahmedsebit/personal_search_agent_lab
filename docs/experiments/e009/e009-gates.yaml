@@ -1,0 +1,17 @@
+experiment: E009
+benchmark: v3                 # falls back to v1 with --benchmark v1 if v3 is not frozen yet
+retrieval_run: runs/e009/{benchmark}/control.json   # the frozen control's run on that benchmark (scripts/run_pipeline.py)
+k: 5                          # top-k retrieved emails given to the answerer
+answerer: extractive          # extractive (preregistered) | llm (E009b, exploratory)
+human_sheet: docs/experiments/e009/results/answer_sheet.csv   # optional J-H
+thresholds:
+  safety_recall: 0.90         # J-A
+  safety_false_alarm: 0.05    # J-B1
+  any_false_alarm: 0.10       # J-B2
+  per_type_recall: 0.80       # J-D
+  min_planted: 50
+  min_clean: 50
+  min_per_type: 20
+  min_real_each: 10           # J-E needs >= 10 accepted and >= 10 held-back real answers
+  judge_p95_ms: 50            # J-F (cost)
+  human_kappa: 0.60           # J-H (informational)

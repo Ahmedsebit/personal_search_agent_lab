@@ -22,3 +22,11 @@ evaluations:
       - {id: S-G, hypothesis: "E002b wins retained", cohort: e002b_diagnostic, metric: ndcg@10, kind: per_query_retain}
       - {id: S-H, hypothesis: "Temporal behaviour not harmed", cohort: temporal_all, metric: ndcg@10, kind: guard}
       - {id: S-I, hypothesis: "Field behaviour not harmed", cohort: field_only, metric: ndcg@10, kind: guard}
+      - {id: C-1, hypothesis: "U2 latency within budget", cohort: all, kind: latency_budget, stat: p95, max_added_ms: 20}
+  pt:
+    optional: true
+    annotations: data/benchmark_pt/queries_pt.csv
+    runs: {control: runs/e004/pt/control.json, treatment: runs/e004/pt/treatment.json}
+    gates:
+      - {id: P-1, hypothesis: "U1 (oracle, by construction) wording gap narrows", cohort: all, metric: ndcg@10, kind: family_gt0, stat: abs_gap, min_n: 30, informational: true}
+      - {id: P-2, hypothesis: "U1 (oracle) worst wording improves", cohort: all, metric: ndcg@10, kind: family_gt0, stat: worst, min_n: 30, informational: true}

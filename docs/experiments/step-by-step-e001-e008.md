@@ -1,9 +1,10 @@
-# E001-E008: step-by-step experiment guide
+# E001-E009: step-by-step experiment guide
 
 This is the main execution path for the research experiments. Follow it in order:
-**E001 -> E002 -> E002b -> E003 -> E004 -> E005 -> E006 -> E007 -> E008**.
+**E001 -> E002 -> E002b -> E003 -> E004 -> E005 -> E006 -> E007 -> E008 -> benchmark v3 -> E009**.
 The linked learning notes explain the implementation; preregistrations define the
 complete hypotheses, parameters, gates, and decision rules.
+The filename retains its historical E001-E008 name so existing links stay valid.
 
 ## Experiment map
 
@@ -18,12 +19,15 @@ complete hypotheses, parameters, gates, and decision rules.
 | 7 | E006 | Semantic dense retrieval alone |
 | 8 | E007 | Hybrid lexical/dense reciprocal-rank fusion |
 | 9 | E008 | Cross-encoder reranking |
+| 9b | Benchmark v3 | Deduplicated gold queries and human-validated silver scenarios |
+| 10 | E009 | Grounded answers, inline citations, and layered answer judges |
 
 **Do not confuse config numbers with experiment IDs.** The original Milestone 1
 configs `002_dense.yaml`, `003_hybrid.yaml`, and `004_hybrid_reranker.yaml` are
 dependency-light demos, not research E002, E003, and E004. Research E002 uses
 config `005`, E002b uses `006`, and research E003-E008 use configs `000` and
-`007`-`014` as shown below.
+`007`-`014` as shown below. E009 uses config `015` for unchanged frozen-control
+retrieval, followed by its separate answer-and-judge runner.
 
 ## Step 0 - Set up and freeze the dataset
 
@@ -174,21 +178,45 @@ Each experiment compares against the control frozen **after the previous
 decision**, including only adopted stages. Do not run all experiments against a
 stale control and stack the winners later.
 
-Arm outputs go to `runs\e00N\v1\<arm>.json` (or `v2`). Gate evaluation writes
+Arm outputs go to `runs\e00N\v1\<arm>.json` (or `v2` / `pt`). Gate evaluation writes
 `docs\experiments\e00N\results\e00N-results.json` and `.md`.
+
+Before E004, build the U1 paraphrase-twin benchmark once:
+
+```powershell
+python scripts\build_paraphrase_twins.py --qrels datasets\benchmarks\judgments.jsonl
+```
+
+Paste the hash from `data\benchmark_pt\BENCHMARK_PT_CARD.md` into
+`benchmarks.pt.annotations_sha256` in `experiments\configs\shared_data.yaml`.
+Keep each family's canonical and paraphrase variants together; they share gold
+qrels. E004's twin gates are informational because its lexicon is benchmark-derived.
+E006-E008 also require the paired `pt` runs shown below.
+
+The U2 runner uses five warm-up queries and the median of three timed repeats
+per query by default. Run each control/treatment pair back to back on the same
+idle machine, with the same timing settings. Inspect the `timing` block as
+well as per-query latency. `HOLD_COST` means quality passed but cost failed;
+`HOLD_COST_UNVERIFIED` means timing is missing or not comparable. Neither
+permits adoption.
 
 Record each verdict and its evidence before editing the frozen control. Adopt
 only candidates allowed by the preregistered decision rules, copy the exact
 stage spec from the experiment config, update the control ID, and append a
-dated history entry. Do not adopt fragile, failed, null, or not-evaluable
+dated history entry. Do not adopt fragile, failed, null, not-evaluable, or cost-held
 results. Keep paired runs from the same frozen control together; preserve
 earlier evidence before reusing output paths.
+
+**Read:** [U1-U3 preregistration](u1-u3-amendment-preregistration.md)
+and [robustness, cost, and label checks](../learning/15-robustness-cost-and-label-checks.md).
 
 ## Step 5 - E004: test fixed synonym expansion
 
 ```powershell
 python scripts\run_pipeline.py --config experiments\configs\010_e004_synonyms.yaml --arm control
 python scripts\run_pipeline.py --config experiments\configs\010_e004_synonyms.yaml --arm treatment
+python scripts\run_pipeline.py --config experiments\configs\010_e004_synonyms.yaml --arm control --benchmark pt
+python scripts\run_pipeline.py --config experiments\configs\010_e004_synonyms.yaml --arm treatment --benchmark pt
 python scripts\evaluate_prereg.py --prereg docs\experiments\e004\e004-gates.yaml
 ```
 
@@ -221,8 +249,30 @@ python scripts\run_pipeline.py --config experiments\configs\011_e005_structure_r
 python scripts\run_pipeline.py --config experiments\configs\011_e005_structure_ranges.yaml --arm treatment --benchmark v1
 python scripts\run_pipeline.py --config experiments\configs\011_e005_structure_ranges.yaml --arm control --benchmark v2
 python scripts\run_pipeline.py --config experiments\configs\011_e005_structure_ranges.yaml --arm treatment --benchmark v2
+```
+
+Before evaluating, complete the U3 blind label audit:
+
+```powershell
+python scripts\make_label_sheet.py --emails datasets\synthetic\emails.jsonl `
+  --runs runs\e005\v2\control.json runs\e005\v2\treatment.json
+```
+
+Fill `human_grade` in `data\benchmark_v2\label_audit\label_sheet.csv` with
+0 (not relevant), 1 (partly relevant), or 2 (clearly relevant). Do not inspect
+`label_key.jsonl` while labelling. Optionally run
+`python scripts\llm_label.py --provider mock` to exercise the offline LLM-judge
+plumbing; it does not replace human labels.
+
+```powershell
+python scripts\label_agreement.py
 python scripts\evaluate_prereg.py --prereg docs\experiments\e005\e005-gates.yaml
 ```
+
+Inspect `label_audit.json` and `.md` in the label-audit directory. Each scenario
+needs at least 30 labelled pairs, binary Cohen's kappa >= 0.60, and silver
+precision >= 0.80. Missing, mismatched, or unvalidated evidence blocks the
+affected v2 gates.
 
 **Checkpoint:** v1 top-50 lists must remain identical (R-0). Judge `field_v2`
 and `range_filter` separately using their component verdicts plus R-0.
@@ -243,6 +293,8 @@ unit tests do not.
 python -m pip install -e ".[models]"
 python scripts\run_pipeline.py --config experiments\configs\012_e006_dense.yaml --arm control
 python scripts\run_pipeline.py --config experiments\configs\012_e006_dense.yaml --arm treatment
+python scripts\run_pipeline.py --config experiments\configs\012_e006_dense.yaml --arm control --benchmark pt
+python scripts\run_pipeline.py --config experiments\configs\012_e006_dense.yaml --arm treatment --benchmark pt
 python scripts\evaluate_prereg.py --prereg docs\experiments\e006\e006-gates.yaml
 ```
 
@@ -264,6 +316,8 @@ every preregistered gate passes.
 python scripts\run_pipeline.py --config experiments\configs\013_e007_hybrid.yaml --arm control
 python scripts\run_pipeline.py --config experiments\configs\013_e007_hybrid.yaml --arm treatment
 python scripts\run_pipeline.py --config experiments\configs\013_e007_hybrid.yaml --arm dense_only
+python scripts\run_pipeline.py --config experiments\configs\013_e007_hybrid.yaml --arm control --benchmark pt
+python scripts\run_pipeline.py --config experiments\configs\013_e007_hybrid.yaml --arm treatment --benchmark pt
 ```
 
 If benchmark v2 was frozen in E005, also run its protection check before
@@ -290,6 +344,8 @@ Record the E007 decision before E008, even if hybrid is not adopted.
 ```powershell
 python scripts\run_pipeline.py --config experiments\configs\014_e008_rerank.yaml --arm control
 python scripts\run_pipeline.py --config experiments\configs\014_e008_rerank.yaml --arm treatment
+python scripts\run_pipeline.py --config experiments\configs\014_e008_rerank.yaml --arm control --benchmark pt
+python scripts\run_pipeline.py --config experiments\configs\014_e008_rerank.yaml --arm treatment --benchmark pt
 ```
 
 If v2 is frozen, include its protection check:
@@ -312,6 +368,105 @@ decision and frozen configuration even if the reranker is not adopted.
 
 **Read:** [E008 preregistration](e008/e008-preregistration.md).
 
+## Step 9b - Prepare and freeze benchmark v3
+
+Record the E008 decision first. E009 uses the retrieval control frozen at that
+point, whether or not E008 was adopted. Do not regenerate v1 or replace the
+earlier experiments' benchmarks.
+
+Build a draft that deduplicates gold queries and adds silver recipient,
+subject, date-range, attachment-file, newest, and oldest scenarios:
+
+```powershell
+python scripts\build_benchmark_v3.py `
+  --emails datasets\synthetic\emails.jsonl `
+  --v1-qrels datasets\benchmarks\judgments.jsonl
+
+python scripts\make_label_sheet.py `
+  --annotations data\benchmark_v3\queries_v3_draft.csv `
+  --qrels data\benchmark_v3\qrels_v3_draft.jsonl `
+  --only-silver --exclude-scenarios recipient subject date_range `
+  --emails datasets\synthetic\emails.jsonl `
+  --out data\benchmark_v3\label_audit
+```
+
+Fill `human_grade` in `data\benchmark_v3\label_audit\label_sheet.csv`, keeping
+the key hidden. The excluded v2 scenarios use the E005 audit already completed
+in Step 6; the new scenarios require their own U3 check.
+
+```powershell
+python scripts\label_agreement.py --dir data\benchmark_v3\label_audit
+python scripts\build_benchmark_v3.py `
+  --emails datasets\synthetic\emails.jsonl `
+  --v1-qrels datasets\benchmarks\judgments.jsonl `
+  --finalize `
+  --label-audit data\benchmark_v2\label_audit\label_audit.json data\benchmark_v3\label_audit\label_audit.json
+```
+
+**Inspect:** `data\benchmark_v3\BENCHMARK_V3_CARD.md`, `queries_v3.csv`, and
+`qrels_v3.jsonl`. The card records deduplication, coverage, and dropped
+unvalidated scenarios. Gold and silver provenance remain explicit.
+
+**Checkpoint:** paste the final query-file SHA-256 into
+`benchmarks.v3.annotations_sha256` in `experiments\configs\shared_data.yaml`.
+Use only finalized, frozen v3 for the main E009 run. Never use
+`--allow-unvalidated` for evidence.
+
+**Read:** [benchmark v3 plan](benchmark-v3/benchmark-v3-plan.md).
+
+## Step 10 - E009: evaluate grounded answers and layered judges
+
+E009 changes the answer-and-judge layer, not retrieval. Its default offline
+extractive answerer selects up to three sentences from the top five retrieved
+emails and attaches `[doc_id]` citations. Existing adopted retrieval stages
+still need their normal dependencies; the default answerer needs no extra model.
+
+First retrieve on frozen v3, then evaluate the answers:
+
+```powershell
+python scripts\run_pipeline.py `
+  --config experiments\configs\015_e009_answers.yaml --arm control --benchmark v3
+python scripts\run_e009.py --benchmark v3
+```
+
+The three judge layers check citation validity, foreign contacts and secret-like
+content (safety); sentence support (grounding); and topic, sender, and temporal
+match (usefulness). Decisions are `ACCEPT`, `REPAIRED`, `REVISE`, or `REJECT`.
+These deterministic checks are a research baseline, not a guarantee of safety
+or factual correctness on real mailbox data.
+
+**Inspect:**
+
+| Artifact | What to review |
+| --- | --- |
+| `runs\e009\v3\control.json` | Frozen retrieval pipeline, annotation hash, ranked results, and timing |
+| `docs\experiments\e009\results\e009-results.json` | Gate evidence, planted-failure detection, single vs layered judges, and real-answer results |
+| `docs\experiments\e009\results\e009-results.md` | Gate table, verdict, per-failure detection, and citation quality |
+| `docs\experiments\e009\results\answer_sheet.csv` | Blind sample of real answers for the optional human acceptance check |
+
+For J-H, fill `would_accept` with 1 or 0 in `answer_sheet.csv`, then rerun
+`python scripts\run_e009.py --benchmark v3`. Keep the benchmark, retrieval run,
+and answerer unchanged while labelling.
+
+**Checkpoint:** review J-A through J-E quality gates and J-F judging cost
+against the [machine-readable thresholds](e009/e009-gates.yaml).
+`JUDGES_VALIDATED` requires all quality gates and cost to pass;
+`JUDGES_NOT_VALIDATED`, `HOLD_COST`, and `NOT_EVALUABLE` do not justify adoption.
+J-H is informational in the automated verdict, but human kappa below 0.60
+blocks user-facing adoption under the preregistration. Record missing human
+evidence explicitly; an automated verdict alone does not establish human agreement.
+
+Do not append answer judges to `current.adopted_stages`: that file describes
+retrieval stages. Record the judge decision and evidence separately in the
+experiment record. An LLM answerer is exploratory E009b, not the preregistered
+extractive arm; external providers must receive synthetic lab data only.
+
+If v3 is not ready, `--benchmark v1` is available for a separately identified
+run; use it on both retrieval and answer commands and do not present it as the
+main v3 result.
+
+**Read:** [E009 preregistration](e009/e009-preregistration.md).
+
 ## Evidence safeguards and further reading
 
 Control parity, annotation hashes, provenance, de-duplication, and guardrails
@@ -326,6 +481,9 @@ about real email search.
 
 - [Learning path](../learning/README.md): implementation exercises and explanations.
 - [Experiment methodology](../experiment-methodology.md): evidence discipline.
-- [E004-E008 roadmap](e004-e008-roadmap.md): shared rules and limitations.
+- [E004-E009 roadmap](e004-e008-roadmap.md): shared rules and limitations.
+- [U1-U3 amendment](u1-u3-amendment-preregistration.md): robustness, cost, and label gates.
+- [Benchmark v3 plan](benchmark-v3/benchmark-v3-plan.md): E009 benchmark preparation.
+- [E009 preregistration](e009/e009-preregistration.md): answer judges and adoption rules.
 - [Composable pipeline guide](../learning/14-composable-pipeline-e004-e008.md): stage design.
 - [Documentation index](../index.md): architecture, design, operations, and background.

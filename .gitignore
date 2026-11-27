@@ -17,3 +17,5 @@ datasets/benchmarks/*.jsonl
 !experiments/results/.gitkeep
 runs/
 data/benchmark_v2/
+data/benchmark_pt/
+data/benchmark_v3/

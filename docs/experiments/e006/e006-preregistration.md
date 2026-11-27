@@ -28,3 +28,8 @@ E006 replaces the lexical system entirely. Its purpose is diagnostic: it shows w
 
 - **E007 proceeds if D-A or D-B passes.** Dense carries complementary signal even when dense alone isn't adoptable.
 - **Dense alone becomes the control only if every gate passes.** That is not expected: names and IDs favour lexical retrieval, so D-D is likely to fail.
+
+
+## Amendment U1–U3 (2026-11-27)
+
+Gates added to `e006-gates.yaml` before any run. See `../u1-u3-amendment-preregistration.md`. Adds paraphrase-twin gates P-A (wording gap narrows) and P-B (worst wording improves), informational P-C (top-10 overlap), latency C-1 (p95 ≤ 150 ms) and cost-benefit C-2 (≥ 0.01 NDCG@10 per +100 ms).

@@ -117,6 +117,10 @@ def test_pipeline_and_gate_clis_run_without_model_downloads(
     run = json.loads(treatment.read_text(encoding="utf-8"))
     assert run["smoke"] is True
     assert len(run["per_query"]) == len(queries)
+    assert run["timing"]["warmup"] == 5
+    assert run["timing"]["repeats"] == 3
+    assert run["timing"]["summary"]["n"] == len(queries)
+    assert run["timing"]["machine"]["id"]
     if stages[0]["type"] == "field_v2":
         assert run["per_query"][1]["meta"]["field_v2"]["fired"] is True
 
@@ -139,7 +143,14 @@ def test_pipeline_and_gate_clis_run_without_model_downloads(
                                 "cohort": "all",
                                 "kind": "per_query_retain",
                                 "metric": "recall@50",
-                            }
+                            },
+                            {
+                                "id": "cost",
+                                "cohort": "all",
+                                "kind": "latency_budget",
+                                "stat": "p95",
+                                "max_ms": 100000,
+                            },
                         ],
                     }
                 },
@@ -162,6 +173,7 @@ def test_pipeline_and_gate_clis_run_without_model_downloads(
     runpy.run_path(str(root / "scripts" / "evaluate_prereg.py"), run_name="__main__")
     result = json.loads((output / "smoke-results.json").read_text(encoding="utf-8"))
     assert result["smoke"] is True
+    assert result["benchmarks"]["smoke"]["cost"]["passed"]
     assert "NOT VALID EVIDENCE" in (output / "smoke-results.md").read_text(encoding="utf-8")
 
 

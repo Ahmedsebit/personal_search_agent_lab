@@ -32,3 +32,8 @@ Latency p50 and p95 per query on CPU, compared with the control. The re-ranker a
 ## Main risk
 
 The cross-encoder has no notion of time or sender. K-D and K-C protect the E003 gains.
+
+
+## Amendment U1–U3 (2026-11-27)
+
+Gates added to `e008-gates.yaml` before any run. See `../u1-u3-amendment-preregistration.md`. Adds paraphrase-twin guardrail P-A (worst wording not worse), informational P-B, latency C-1 (p95 ≤ 600 ms) and cost-benefit C-2.

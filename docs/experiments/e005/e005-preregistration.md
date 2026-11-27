@@ -43,3 +43,8 @@ The reference time is the newest email in the corpus, never the wall clock. Afte
 
 - **Date ranges:** a large gain is expected. The control cannot express ranges at all, and silver qrels reward exactly this behaviour, so this result shows correctness more than magnitude.
 - **Subject queries:** these may already be near the ceiling for the control, because subject words are also lexical matches. A null result on R-C is plausible.
+
+
+## Amendment U1–U3 (2026-11-27)
+
+Gates added to `e005-gates.yaml` before any run. See `../u1-u3-amendment-preregistration.md`. Adds latency gate C-1 (p95 added ≤ 20 ms). v2 gates now require a validated silver-label audit per scenario (U3).

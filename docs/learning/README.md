@@ -1,7 +1,7 @@
-# E001-E008 Learning Path
+# E001-E009 Learning Path
 
 For commands, expected outputs, and decision checkpoints, follow the
-[E001-E008 step-by-step guide](../experiments/step-by-step-e001-e008.md).
+[E001-E009 step-by-step guide](../experiments/step-by-step-e001-e008.md).
 These supporting notes explain how to implement and understand each mechanism,
 starting with E001 rather than copying the finished retriever.
 
@@ -19,6 +19,15 @@ starting with E001 rather than copying the finished retriever.
 11. [Running and validating E002b](12-running-and-validating-e002b.md)
 12. [Running and validating E003](13-running-and-validating-e003.md)
 13. [Composable pipelines for E004-E008](14-composable-pipeline-e004-e008.md)
+14. [Robustness, cost, and label checks (U1-U3)](15-robustness-cost-and-label-checks.md)
+15. [Prepare and freeze benchmark v3](../experiments/benchmark-v3/benchmark-v3-plan.md)
+16. [E009 grounded answers, citations, and layered judges](../experiments/e009/e009-preregistration.md)
+
+For E009, follow [Step 10 of the execution guide](../experiments/step-by-step-e001-e008.md#step-10---e009-evaluate-grounded-answers-and-layered-judges):
+reuse the frozen retrieval control, evaluate clean and planted-failure answers,
+inspect real-answer citation quality, and optionally complete the human
+acceptance sheet. A judge verdict does not replace the earlier retrieval
+adoption decisions.
 
 Each guide explains the purpose, implementation shape, deliberate baseline
 limitations, tests, and readiness checks for the next exercise. Existing

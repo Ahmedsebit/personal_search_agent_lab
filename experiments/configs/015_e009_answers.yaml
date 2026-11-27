@@ -1,0 +1,6 @@
+# E009 uses the frozen control's retrieval unchanged; this config only produces that run file.
+experiment: E009
+shared: experiments/configs/shared_data.yaml
+output_dir: runs/e009
+depth: 50
+arms: {}

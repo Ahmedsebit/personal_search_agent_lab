@@ -29,3 +29,8 @@ Fusing ranks can wash out an E003-T recency order or an E005 range filter, becau
 ## Exploratory, not gated
 
 `exploratory_k20`: RRF with k = 20.
+
+
+## Amendment U1–U3 (2026-11-27)
+
+Gates added to `e007-gates.yaml` before any run. See `../u1-u3-amendment-preregistration.md`. Adds paraphrase-twin gates P-A, P-B and guardrail P-C (overlap not worse), latency C-1 (p95 ≤ 200 ms) and cost-benefit C-2.

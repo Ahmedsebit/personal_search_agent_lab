@@ -16,9 +16,17 @@ evaluations:
       - {id: K-D, hypothesis: "Recency ordering not undone", cohort: temporal_all, metric: ndcg@10, kind: guard}
       - {id: K-E, hypothesis: "Mixed field+time not harmed", cohort: field_and_temporal, metric: ndcg@10, kind: guard}
       - {id: K-F, hypothesis: "E002b wins retained", cohort: e002b_diagnostic, metric: ndcg@10, kind: per_query_retain}
+      - {id: C-1, hypothesis: "U2 latency within budget", cohort: all, kind: latency_budget, stat: p95, max_ms: 600}
+      - {id: C-2, hypothesis: "U2 quality gain worth the added time", cohort: all, metric: ndcg@10, kind: gain_per_latency, min_gain_per_100ms: 0.01}
   v2:
     optional: true
     annotations: data/benchmark_v2/queries_v2.csv
     runs: {control: runs/e008/v2/control.json, treatment: runs/e008/v2/treatment.json}
     gates:
       - {id: K-V2, hypothesis: "v2 structure not harmed", cohort: all, metric: ndcg@10, kind: guard}
+  pt:
+    annotations: data/benchmark_pt/queries_pt.csv
+    runs: {control: runs/e008/pt/control.json, treatment: runs/e008/pt/treatment.json}
+    gates:
+      - {id: P-A, hypothesis: "U1 re-ranking does not lower the worst wording", cohort: all, metric: ndcg@10, kind: family_guard, stat: worst, min_n: 30}
+      - {id: P-B, hypothesis: "U1 re-ranking narrows the wording gap (exploratory)", cohort: all, metric: ndcg@10, kind: family_gt0, stat: abs_gap, min_n: 30, informational: true}

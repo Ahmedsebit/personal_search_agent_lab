@@ -19,9 +19,18 @@ evaluations:
       - {id: H-F, hypothesis: "People not harmed", cohort: person_all, metric: ndcg@10, kind: guard}
       - {id: H-G, hypothesis: "Temporal not harmed", cohort: temporal_all, metric: ndcg@10, kind: guard}
       - {id: H-H, hypothesis: "E002b wins retained", cohort: e002b_diagnostic, metric: ndcg@10, kind: per_query_retain}
+      - {id: C-1, hypothesis: "U2 latency within budget", cohort: all, kind: latency_budget, stat: p95, max_ms: 200}
+      - {id: C-2, hypothesis: "U2 quality gain worth the added time", cohort: all, metric: ndcg@10, kind: gain_per_latency, min_gain_per_100ms: 0.01}
   v2:
     optional: true
     annotations: data/benchmark_v2/queries_v2.csv
     runs: {control: runs/e007/v2/control.json, treatment: runs/e007/v2/treatment.json}
     gates:
       - {id: H-V2, hypothesis: "v2 structure not harmed", cohort: all, metric: ndcg@10, kind: guard}
+  pt:
+    annotations: data/benchmark_pt/queries_pt.csv
+    runs: {control: runs/e007/pt/control.json, treatment: runs/e007/pt/treatment.json}
+    gates:
+      - {id: P-A, hypothesis: "U1 hybrid narrows the wording gap", cohort: all, metric: ndcg@10, kind: family_gt0, stat: abs_gap, min_n: 30}
+      - {id: P-B, hypothesis: "U1 hybrid raises the worst wording", cohort: all, metric: ndcg@10, kind: family_gt0, stat: worst, min_n: 30}
+      - {id: P-C, hypothesis: "U1 top-10 agreement across wordings not worse", cohort: all, metric: ndcg@10, kind: family_guard, stat: overlap, min_n: 30}

@@ -34,12 +34,14 @@ pip install -e '.[dev]'
 python scripts/generate_dataset.py --emails 2000 --queries 200 --seed 42
 ```
 
-## Run E001-E008 step by step
+## Run E001-E009 step by step
 
-Follow the [E001-E008 step-by-step guide](docs/experiments/step-by-step-e001-e008.md)
+Follow the [E001-E009 step-by-step guide](docs/experiments/step-by-step-e001-e008.md)
 for setup, dataset generation, every experiment command, expected artifacts,
 and the decision checkpoints between experiments. The sequence includes E002b
-and keeps earlier baselines frozen.
+and keeps earlier baselines frozen. It covers the U1-U3 robustness, latency/cost,
+and silver-label checks, then benchmark v3 and E009 grounded answers with
+citations and layered judges.
 
 The original Milestone 1 configs `002_dense.yaml`, `003_hybrid.yaml`, and
 `004_hybrid_reranker.yaml` remain available as dependency-light demos; their
@@ -84,6 +86,10 @@ Use [`docs/learning/README.md`](docs/learning/README.md) as the guided learning 
 ## Research implementation references
 
 The [E003 integration reference](E003_INTEGRATION.md) documents control wiring
-and parity. The [E004-E008 roadmap](docs/experiments/e004-e008-roadmap.md) and
+and parity. The [E004-E009 roadmap](docs/experiments/e004-e008-roadmap.md) and
 [pipeline learning guide](docs/learning/14-composable-pipeline-e004-e008.md)
-explain the later stages. Use the consolidated guide above for execution order.
+explain the later retrieval stages. The
+[E009 preregistration](docs/experiments/e009/e009-preregistration.md) defines
+the answer and judge evaluation, with
+[benchmark v3 preparation](docs/experiments/benchmark-v3/benchmark-v3-plan.md)
+as its prerequisite. Use the consolidated guide above for execution order.

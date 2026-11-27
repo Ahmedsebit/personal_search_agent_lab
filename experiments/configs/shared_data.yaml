@@ -19,3 +19,11 @@ benchmarks:
     annotations: data/benchmark_v2/queries_v2.csv
     qrels: data/benchmark_v2/qrels_v2.jsonl
     annotations_sha256: null                   # paste the hash from the v2 benchmark card to freeze it
+  pt:                                          # U1: scripts/build_paraphrase_twins.py
+    annotations: data/benchmark_pt/queries_pt.csv
+    qrels: data/benchmark_pt/qrels_pt.jsonl
+    annotations_sha256: null
+  v3:                                          # scripts/build_benchmark_v3.py --finalize
+    annotations: data/benchmark_v3/queries_v3.csv
+    qrels: data/benchmark_v3/qrels_v3.jsonl
+    annotations_sha256: null

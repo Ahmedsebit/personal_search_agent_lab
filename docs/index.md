@@ -2,7 +2,7 @@
 
 ## Start here
 
-- [E001-E008 step-by-step guide](experiments/step-by-step-e001-e008.md) - the complete execution sequence, including E002b
+- [E001-E009 step-by-step guide](experiments/step-by-step-e001-e008.md) - the complete execution sequence, including E002b, U1-U3, and benchmark v3
 - [Project charter](project-charter.md)
 - [Milestone 1 requirements](requirements.md)
 - [Getting started](development/getting-started.md)
@@ -17,7 +17,7 @@
 
 ## Research experiments
 
-- [Complete E001-E008 workflow](experiments/step-by-step-e001-e008.md)
+- [Complete E001-E009 workflow](experiments/step-by-step-e001-e008.md)
 - [E001 BM25](experiments/e001-bm25.md)
 - [E002 query normalization](experiments/e002-query-normalized-bm25.md)
 - [E002b context-aware alias normalization](experiments/e002b-context-aware-alias-normalization.md)
@@ -27,12 +27,16 @@
 - [E006 semantic dense retrieval](experiments/e006/e006-preregistration.md)
 - [E007 hybrid retrieval](experiments/e007/e007-preregistration.md)
 - [E008 cross-encoder reranking](experiments/e008/e008-preregistration.md)
+- [E009 grounded answers and layered judges](experiments/e009/e009-preregistration.md)
+- [E009 machine-readable gates](experiments/e009/e009-gates.yaml)
+- [Benchmark v3 preparation and freeze](experiments/benchmark-v3/benchmark-v3-plan.md)
+- [U1-U3 robustness, cost, and silver-label amendment](experiments/u1-u3-amendment-preregistration.md)
 - [Experiment methodology](experiment-methodology.md)
 
 ## Supporting integration references
 
 - [E003 integration and control parity](../E003_INTEGRATION.md)
-- [E004-E008 roadmap](experiments/e004-e008-roadmap.md)
+- [E004-E009 roadmap](experiments/e004-e008-roadmap.md)
 - [Composable pipeline guide](learning/14-composable-pipeline-e004-e008.md)
 
 ## Original Milestone 1 demos
@@ -56,7 +60,7 @@ These earlier documents use demo numbering, not the research sequence above.
 - [Complete code walkthrough](implementation/code-walkthrough.md)
 - [E001 BM25 code guide](implementation/e001-bm25-code-guide.md)
 
-## E001-E008 learning notes
+## E001-E009 learning notes
 
 - [Implementation learning path](learning/README.md)
 - [Tokenization](learning/01-tokenization.md)
@@ -74,3 +78,5 @@ These earlier documents use demo numbering, not the research sequence above.
 - [Running and validating E002b](learning/12-running-and-validating-e002b.md)
 - [Running and validating E003](learning/13-running-and-validating-e003.md)
 - [Composable pipelines for E004-E008](learning/14-composable-pipeline-e004-e008.md)
+- [Robustness, cost, and label checks](learning/15-robustness-cost-and-label-checks.md)
+- [E009 execution and decision checkpoints](experiments/step-by-step-e001-e008.md#step-10---e009-evaluate-grounded-answers-and-layered-judges)

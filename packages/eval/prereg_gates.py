@@ -16,9 +16,11 @@ from collections.abc import Callable
 from statistics import mean
 from typing import Any
 
+from packages.eval import cost, robustness
 from packages.eval.e003_comparison import CHANGE_TOL, bootstrap_ci
 
 DEFAULT_EPS = 0.01
+COST_KINDS = {"latency_budget", "gain_per_latency"}
 Record = dict[str, Any]
 
 
@@ -50,7 +52,10 @@ def select(cohort_def: str | Record, ann: list[Record], run: dict[str, Record]) 
 
 
 def evaluate(
-    prereg: Record, runs: dict[str, dict[str, Record]], ann: list[Record]
+    prereg: Record,
+    runs: dict[str, dict[str, Record]],
+    ann: list[Record],
+    timing: dict[str, Record | None] | None = None,
 ) -> dict[str, Record]:
     eps = prereg.get("epsilon", DEFAULT_EPS)
     ann_by = {a["query_id"]: a for a in ann}
@@ -82,7 +87,49 @@ def evaluate(
             "treatment": g.get("treatment", "treatment"),
         }
         r["component"] = g.get("component")
-        if len(qids) < g.get("min_n", 1):
+        r["informational"] = bool(g.get("informational"))
+        r["cost_gate"] = kind in COST_KINDS
+        if kind in ("family_gt0", "family_guard"):
+            r["improvement_gate"] = kind == "family_gt0"
+            stat = g["stat"]
+            deltas = robustness.oriented_deltas(ctrl, trt, ann, qids, stat, m)
+            r.update(stat=stat, n_families=len(deltas))
+            if len(deltas) < g.get("min_n", 1):
+                r.update(
+                    status=f"NOT EVALUABLE (families={len(deltas)} < {g.get('min_n', 1)})",
+                    passed=False,
+                    not_evaluable=True,
+                )
+            else:
+                values = list(deltas.values())
+                passed = mean(values) > CHANGE_TOL if kind == "family_gt0" else mean(values) >= -eps
+                r.update(
+                    delta=mean(values),
+                    ci95=bootstrap_ci(values),
+                    improved=sum(x > CHANGE_TOL for x in values),
+                    regressed=sum(x < -CHANGE_TOL for x in values),
+                    passed=passed,
+                )
+        elif kind in COST_KINDS:
+            reason = cost.comparable(
+                (timing or {}).get(r["control"]), (timing or {}).get(r["treatment"])
+            )
+            if reason:
+                r.update(status=f"NOT EVALUABLE ({reason})", passed=False, not_evaluable=True)
+            elif len(qids) < g.get("min_n", 1):
+                r.update(
+                    status=f"NOT EVALUABLE (n={len(qids)} < {g.get('min_n', 1)})",
+                    passed=False,
+                    not_evaluable=True,
+                )
+            elif kind == "latency_budget":
+                r.update(cost.latency_gate(g, list(ctrl.values()), list(trt.values())))
+            else:
+                delta = mean(trt[q]["metrics"][m] - ctrl[q]["metrics"][m] for q in qids)
+                r.update(
+                    cost.gain_per_latency_gate(g, delta, list(ctrl.values()), list(trt.values()))
+                )
+        elif len(qids) < g.get("min_n", 1):
             r.update(
                 status=f"NOT EVALUABLE (n={len(qids)} < {g.get('min_n', 1)})",
                 passed=False,
@@ -129,6 +176,18 @@ def evaluate(
 
 
 def verdict(gates: dict[str, Record]) -> str:
+    gates = {k: g for k, g in gates.items() if not g.get("informational")}
+    cost_gates = {k: g for k, g in gates.items() if g.get("cost_gate")}
+    quality = _quality_verdict({k: g for k, g in gates.items() if not g.get("cost_gate")})
+    if quality == "ADOPT_CANDIDATE" and cost_gates:
+        if any(not g["passed"] and not g.get("not_evaluable") for g in cost_gates.values()):
+            return "HOLD_COST"
+        if any(g.get("not_evaluable") for g in cost_gates.values()):
+            return "HOLD_COST_UNVERIFIED"
+    return quality
+
+
+def _quality_verdict(gates: dict[str, Record]) -> str:
     if not gates:
         return "NOT_EVALUABLE"
     if any(g.get("not_evaluable") for g in gates.values()):
@@ -150,7 +209,11 @@ def component_verdicts(gates: dict[str, Record]) -> dict[str, str]:
     out = {}
     for c in comps:
         sub = {k: g for k, g in gates.items() if g.get("component") in (None, c)}
-        if any(g.get("not_evaluable") for g in sub.values() if g.get("component") == c):
+        if any(
+            g.get("not_evaluable") and not g.get("cost_gate") and not g.get("informational")
+            for g in sub.values()
+            if g.get("component") == c
+        ):
             out[c] = "NOT_EVALUABLE"
         else:
             out[c] = verdict(sub)
